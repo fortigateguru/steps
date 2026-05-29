@@ -18,14 +18,14 @@
             font-family: 'Rubik', sans-serif;
             font-weight: 700;
         }
-        /* Custom Glassmorphism Panels */
+        /* Custom Glassmorphism Panels --> */
         .glass-card {
             background: rgba(15, 23, 42, 0.45);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        /* Fluid Ripple Ring Animations */
+        /* Fluid Ripple Ring Animations --> */
         @keyframes dynamicRipple {
             0% { transform: scale(0.96); opacity: 0.65; }
             50% { transform: scale(1.04); opacity: 0.3; }
@@ -34,7 +34,7 @@
         .ripple-glow {
             animation: dynamicRipple 2.2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
         }
-        /* Morphing Fluid Organic Mascot with Minty Ocean Colors */
+        /* Morphing Fluid Organic Mascot with Minty Ocean Colors --> */
         @keyframes organicMorph {
             0%, 100% { d: path("M25,5 C37,5 45,13 45,25C45,37 37,45 25,45C13,45 5,37 5,25C5,13 13,5 25,5Z"); }
             30% { d: path("M25,8C36,6 44,14 46,24C48,34 40,40 30,43C20,46 12,42 8,32C4,22 14,10 25,8Z"); }
@@ -43,7 +43,7 @@
         .fluid-mascot-path {
             animation: organicMorph 7s ease-in-out infinite alternate;
         }
-        /* Ultra-Fast Responsive Scale Bounce for step footfall */
+        /* Ultra-Fast Responsive Scale Bounce for step footfall --> */
         .scale-pulse-active {
             animation: customBounce 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.2);
         }
@@ -232,6 +232,27 @@
 
         </div>
 
+        <!-- NEW Segment Control: Sensor Sensitivity Level -->
+        <div class="glass-card rounded-[28px] p-4 flex flex-col space-y-3">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-extrabold text-stone-300 uppercase tracking-wider">רגישות חיישנים (למצבי אחיזה שונים):</span>
+                <span id="sensBadge" class="text-[8px] font-bold bg-emerald-500/15 text-emerald-300 px-2 py-0.5 rounded-full uppercase tracking-wider">מצב יד יציבה</span>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-2 bg-black/40 rounded-xl p-1 border border-white/5">
+                <button id="sensNormalBtn" class="py-2 rounded-lg text-xs font-bold text-stone-400 hover:text-stone-200 transition-all">
+                    רגילה (בכיס / בתנופה)
+                </button>
+                <button id="sensHighBtn" class="py-2 rounded-lg text-xs font-bold bg-emerald-500 text-slate-950 shadow-md transition-all">
+                    גבוהה (יד יציבה / החזקת מסך)
+                </button>
+            </div>
+            
+            <p class="text-[10px] text-stone-400 text-center leading-relaxed">
+                💡 <strong>מצב יד יציבה</strong> מפעיל אלגוריתם בעל סף רגישות נמוך במיוחד שמסוגל לקלוט את הזעזועים הזעירים של הליכה העוברים דרך הגוף, גם כאשר כף היד שלכם מקובעת לחלוטין.
+            </p>
+        </div>
+
         <!-- Section 3: Luxury Control Triggers -->
         <div class="glass-card rounded-[32px] p-5 space-y-3">
             <!-- Active Master Session Toggle -->
@@ -358,10 +379,16 @@
         // Accelerometer analysis states
         let lastAccelerationMag = 9.81;
         let runningBaseGravity = 9.81;
-        const lowPassAlpha = 0.15; // standard low-pass smoothing factor
+        
+        // Dynamic Sensitivity Config parameters (Steady hand vs Normal mode)
+        let sensitivityMode = 'high'; // default to high for 'steady hand'
+        let lowPassAlpha = 0.35; // default high sensitivity alpha (allow quick impacts)
+        let stepThresholdOffset = 0.45; // trigger offset above gravity
+        let resetThresholdOffset = 0.30; // reset offset below gravity
+        
         let isGaitPeakActive = false;
         let lastDetectedStepTime = 0;
-        const minimumStepPeriod = 360; // minimum duration between foot strikes in milliseconds
+        const minimumStepPeriod = 330; // minimum duration between foot strikes in milliseconds (slightly faster for jog/walk)
 
         // Dynamic 60fps Canvas render configurations
         let burstCanvas, burstCanvasContext;
@@ -401,7 +428,7 @@
                 'soundLabel', 'settingsBtn', 'configModal', 'goalInputField',
                 'closeModalBtn', 'applyGoalBtn', 'toastNode', 'toastTitle',
                 'toastMessage', 'sensorStatusBadge', 'diagX', 'diagY', 'diagZ', 'diagMag',
-                'envAlertCard', 'envAlertMessage'
+                'envAlertCard', 'envAlertMessage', 'sensBadge', 'sensNormalBtn', 'sensHighBtn'
             ];
             elementIds.forEach(id => {
                 UI[id] = document.getElementById(id);
@@ -429,7 +456,7 @@
                     }
                     if (UI.sensorStatusBadge) {
                         UI.sensorStatusBadge.innerText = "גישה חסומה";
-                        UI.sensorStatusBadge.className = "text-[8px] font-extrabold bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 px-2.5 py-1 rounded-full uppercase tracking-wider";
+                        UI.sensorStatusBadge.className = "text-[8px] font-extrabold bg-rose-500/20 border border-rose-500/30 text-rose-400 px-2.5 py-1 rounded-full uppercase tracking-wider";
                     }
                 }
             } catch (e) {
@@ -534,6 +561,14 @@
                 registerStep();
             });
 
+            // Sensitivity Switch Toggles
+            UI.sensNormalBtn?.addEventListener('click', () => {
+                changeSensitivity('normal');
+            });
+            UI.sensHighBtn?.addEventListener('click', () => {
+                changeSensitivity('high');
+            });
+
             // Active action buttons toggles
             UI.sessionToggleBtn?.addEventListener('click', () => {
                 initVibeAudioInstance();
@@ -581,6 +616,34 @@
                     dispatchCustomToast('היעד עודכן! 🎯', `היעד היומי שלך מכויל כעת ל-${dailyStepGoal.toLocaleString()} צעדים.`);
                 }
             });
+        }
+
+        // Change IMU Sensitivity Algorithm Parameters
+        function changeSensitivity(mode) {
+            sensitivityMode = mode;
+            if (mode === 'high') {
+                // Highly sensitive configuration for Steady Hand
+                lowPassAlpha = 0.38; // allow raw shocks
+                stepThresholdOffset = 0.42; // very low acceleration needed above gravity
+                resetThresholdOffset = 0.28; // small drop required to reset gait
+                
+                UI.sensHighBtn.className = "py-2 rounded-lg text-xs font-bold bg-emerald-500 text-slate-950 shadow-md transition-all";
+                UI.sensNormalBtn.className = "py-2 rounded-lg text-xs font-bold text-stone-400 hover:text-stone-200 transition-all";
+                UI.sensBadge.innerText = "מצב יד יציבה";
+                UI.sensBadge.className = "text-[8px] font-bold bg-emerald-500/15 text-emerald-300 px-2 py-0.5 rounded-full uppercase tracking-wider";
+                dispatchCustomToast('רגישות מוגברת הופעלה ⚡', 'האלגוריתם מכויל כעת לקליטת תנודות זעירות של אחיזת מסך.');
+            } else {
+                // Standard walking motion parameters (phone in pocket / arm swinging)
+                lowPassAlpha = 0.15;
+                stepThresholdOffset = 1.25;
+                resetThresholdOffset = 0.75;
+                
+                UI.sensNormalBtn.className = "py-2 rounded-lg text-xs font-bold bg-emerald-500 text-slate-950 shadow-md transition-all";
+                UI.sensHighBtn.className = "py-2 rounded-lg text-xs font-bold text-stone-400 hover:text-stone-200 transition-all";
+                UI.sensBadge.innerText = "מצב רגיל";
+                UI.sensBadge.className = "text-[8px] font-bold bg-white/5 border border-white/10 text-stone-300 px-2 py-0.5 rounded-full uppercase tracking-wider";
+                dispatchCustomToast('רגישות רגילה הופעלה 👟', 'האלגוריתם מכויל כעת לתנופות זרוע קלאסיות או הליכה בכיס.');
+            }
         }
 
         // Safe Session active trackers
@@ -680,6 +743,7 @@
                                 UI.sensorStatusBadge.innerText = "מחובר";
                                 UI.sensorStatusBadge.className = "text-[8px] font-extrabold bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 px-2.5 py-1 rounded-full uppercase tracking-wider";
                             }
+                            if (UI.envAlertCard) UI.envAlertCard.classList.add('hidden');
                         }
                     })
                     .catch((err) => console.log('Permission block handled safely'));
@@ -725,8 +789,8 @@
             const now = Date.now();
             
             // Dynamic threshold threshold margins around the moving baseline gravity
-            const upperStepThreshold = runningBaseGravity + 1.25;
-            const lowerResetThreshold = runningBaseGravity - 0.75;
+            const upperStepThreshold = runningBaseGravity + stepThresholdOffset;
+            const lowerResetThreshold = runningBaseGravity - resetThresholdOffset;
 
             if (!isGaitPeakActive) {
                 // Waiting for acceleration to shoot up past the dynamic limit
