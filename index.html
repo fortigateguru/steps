@@ -3,129 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vibe - מעקב צעדים מתקדם</title>
+    <title>vibe - Premium Stride Companion</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts for Modern Hebrew & English Typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Google Fonts for Ultra-Premium Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Rubik:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Rubik', 'Plus Jakarta Sans', sans-serif;
-            background: radial-gradient(circle at 50% 0%, #061523 0%, #03070c 100%);
+            font-family: 'Rubik', 'Inter', sans-serif;
+            background: radial-gradient(circle at 50% 0%, #0c0e12 0%, #030406 100%);
             min-height: 100vh;
         }
-        .luxury-font {
-            font-family: 'Rubik', sans-serif;
-            font-weight: 700;
-        }
-        /* Custom Glassmorphism Panels --> */
+        /* Custom Glassmorphism Panels - Ultra Sharp & Matte */
         .glass-card {
-            background: rgba(15, 23, 42, 0.45);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(10, 12, 16, 0.7);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
-        /* Fluid Ripple Ring Animations --> */
-        @keyframes dynamicRipple {
-            0% { transform: scale(0.96); opacity: 0.65; }
-            50% { transform: scale(1.04); opacity: 0.3; }
-            100% { transform: scale(1.15); opacity: 0; }
-        }
-        .ripple-glow {
-            animation: dynamicRipple 2.2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
-        }
-        /* Morphing Fluid Organic Mascot with Minty Ocean Colors --> */
-        @keyframes organicMorph {
-            0%, 100% { d: path("M25,5 C37,5 45,13 45,25C45,37 37,45 25,45C13,45 5,37 5,25C5,13 13,5 25,5Z"); }
-            30% { d: path("M25,8C36,6 44,14 46,24C48,34 40,40 30,43C20,46 12,42 8,32C4,22 14,10 25,8Z"); }
-            60% { d: path("M25,4C38,8 46,12 43,26C40,40 34,46 25,43C16,40 7,34 7,24C7,14 12,1 25,4Z"); }
-        }
-        .fluid-mascot-path {
-            animation: organicMorph 7s ease-in-out infinite alternate;
-        }
-        /* Ultra-Fast Responsive Scale Bounce for step footfall --> */
+        /* Active bounce state for steps progress ring */
         .scale-pulse-active {
-            animation: customBounce 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+            animation: customBounce 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
         @keyframes customBounce {
             0% { transform: scale(1); }
-            45% { transform: scale(1.06); }
+            50% { transform: scale(1.04); }
             100% { transform: scale(1); }
+        }
+        /* Smooth progress bar transitions */
+        circle {
+            transition: stroke-dashoffset 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
     </style>
 </head>
-<body class="text-stone-100 flex flex-col justify-between overflow-x-hidden">
+<body class="text-slate-200 flex flex-col justify-between overflow-x-hidden antialiased">
 
     <!-- Top Luxury Navigation Bar -->
-    <header class="px-6 py-4 border-b border-white/5 bg-black/10 backdrop-blur-md sticky top-0 z-40">
+    <header class="px-6 py-4 border-b border-white/5 bg-black/30 backdrop-blur-md sticky top-0 z-40">
         <div class="max-w-md mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-3 space-x-reverse">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-emerald-500 via-teal-400 to-cyan-300 flex items-center justify-center shadow-lg transform hover:scale-105 transition-all">
-                    <span class="text-sm">✨</span>
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-500/10">
+                    <!-- Premium minimal abstract activity icon -->
+                    <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                    </svg>
                 </div>
                 <div>
-                    <h1 class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-200 bg-clip-text text-transparent">vibe</h1>
-                    <p class="text-[9px] font-bold text-emerald-400/80 uppercase tracking-widest">מעקב תנועה מתקדם</p>
+                    <h1 class="text-xl font-black tracking-wide text-white uppercase" style="font-family: 'Inter', sans-serif;">vibe</h1>
+                    <p class="text-[10px] font-bold text-emerald-400 tracking-widest uppercase">סדרת מלווי ספורט פרימיום</p>
                 </div>
             </div>
 
-            <!-- Header Controls -->
+            <!-- Header Controls (Clean vector buttons) -->
             <div class="flex items-center space-x-2 space-x-reverse">
-                <button id="soundToggle" class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-sm shadow-md hover:bg-white/10 transition-all text-stone-300 hover:text-white" title="הפעל/השתק צלילי בועות">
-                    <span id="soundLabel">🔊</span>
+                <!-- Sound Toggle -->
+                <button id="soundToggle" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shadow-md hover:bg-white/10 transition-all text-slate-400 hover:text-white" title="הפעל/השתק צלילים">
+                    <svg id="soundOnIcon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+                    </svg>
+                    <svg id="soundOffIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 9.75L19.5 12m0 0l2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+                    </svg>
                 </button>
-                <button id="settingsBtn" class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-sm shadow-md hover:bg-white/10 transition-all text-stone-300 hover:text-white" title="שינוי יעד הצעדים">
-                    <span>🎯</span>
+                <!-- Daily Goal Trigger -->
+                <button id="settingsBtn" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shadow-md hover:bg-white/10 transition-all text-slate-400 hover:text-white" title="הגדרת יעד יומי">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
+                    </svg>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Main Mobile Dashboard -->
-    <main class="flex-grow max-w-md w-full mx-auto px-4 py-4 space-y-5 flex flex-col justify-center">
+    <main class="flex-grow max-w-md w-full mx-auto px-4 py-6 space-y-6 flex flex-col justify-center">
 
-        <!-- Modern Floating Toast Alerts -->
-        <div id="toastNode" class="fixed top-20 left-1/2 -translate-x-1/2 w-[92%] max-w-sm bg-slate-900/95 border border-emerald-500/20 rounded-2xl shadow-2xl py-3.5 px-4 flex items-center space-x-3.5 space-x-reverse transform -translate-y-28 opacity-0 transition-all duration-500 z-50 pointer-events-none">
-            <div class="w-9 h-9 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-lg shrink-0">
-                🏆
+        <!-- Modern Floating Toast Alerts (Minimalist Banner) -->
+        <div id="toastNode" class="fixed top-24 left-1/2 -translate-x-1/2 w-[92%] max-w-sm bg-slate-900 border border-emerald-500/20 rounded-2xl shadow-2xl py-4 px-5 flex items-center space-x-4 space-x-reverse transform -translate-y-28 opacity-0 transition-all duration-500 z-50 pointer-events-none">
+            <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0110 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                </svg>
             </div>
             <div>
-                <h4 id="toastTitle" class="font-extrabold text-xs text-emerald-300 tracking-wider uppercase">הישג vibe חדש!</h4>
-                <p id="toastMessage" class="text-xs text-stone-300 font-medium">המשך ללכת, אתה עושה עבודה מדהימה!</p>
+                <h4 id="toastTitle" class="font-extrabold text-sm text-slate-100">הישג חדש!</h4>
+                <p id="toastMessage" class="text-xs text-slate-400 font-medium">הישג פעילות פיזית יוצא דופן!</p>
             </div>
         </div>
 
         <!-- Section 1: Sunset Glass Step Ring -->
-        <div id="orbContainer" class="relative glass-card rounded-[38px] p-6 shadow-2xl overflow-hidden flex flex-col items-center">
+        <div id="orbContainer" class="relative glass-card rounded-[32px] p-6 overflow-hidden flex flex-col items-center">
             
             <!-- Radiant Background Glow Nodes -->
             <div class="absolute -top-24 -left-24 w-52 h-52 rounded-full bg-emerald-500/5 blur-3xl pointer-events-none"></div>
             <div class="absolute -bottom-24 -right-24 w-52 h-52 rounded-full bg-cyan-500/5 blur-3xl pointer-events-none"></div>
 
             <!-- Dynamic State Badge Indicator -->
-            <div class="z-10 flex items-center space-x-2 space-x-reverse px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 mb-4">
-                <span id="stateIndicator" class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                <span id="stateText" class="text-[9px] font-bold text-stone-300 uppercase tracking-widest">ממתין להפעלת האימון</span>
+            <div class="z-10 flex items-center space-x-2 space-x-reverse px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-5">
+                <span id="stateIndicator" class="w-2 h-2 rounded-full bg-slate-500"></span>
+                <span id="stateText" class="text-xs font-bold text-slate-400 uppercase tracking-widest">ממתין להפעלת ההליכה</span>
             </div>
 
             <!-- Radial Stride Progress Visualizer -->
             <div id="radialAnchor" class="relative w-64 h-64 flex items-center justify-center z-10 select-none cursor-pointer">
-                <!-- Glowing Ripple Animation Triggers -->
-                <div class="absolute inset-4 rounded-full border border-emerald-500/10 ripple-glow"></div>
-                <div class="absolute inset-8 rounded-full border border-cyan-500/5 ripple-glow" style="animation-delay: 0.7s"></div>
                 
                 <svg class="absolute inset-0 w-full h-full transform -rotate-90" viewBox="0 0 200 200">
                     <!-- Progress Arc Track Background -->
-                    <circle cx="100" cy="100" r="84" fill="transparent" stroke="rgba(255, 255, 255, 0.03)" stroke-width="7"></circle>
+                    <circle cx="100" cy="100" r="84" fill="transparent" stroke="rgba(255, 255, 255, 0.02)" stroke-width="6"></circle>
                     <!-- Vivid Active Stride Arc -->
-                    <circle id="arcProgress" cx="100" cy="100" r="84" fill="transparent" stroke="url(#coolVibeGlow)" stroke-width="7" stroke-dasharray="528" stroke-dashoffset="528" stroke-linecap="round" class="transition-all duration-300"></circle>
+                    <circle id="arcProgress" cx="100" cy="100" r="84" fill="transparent" stroke="url(#emeraldGlow)" stroke-width="6" stroke-dasharray="528" stroke-dashoffset="528" stroke-linecap="round"></circle>
                     
-                    <!-- Cool Mint-Blue Linear Gradient -->
+                    <!-- Premium Emerald/Teal Gradient -->
                     <defs>
-                        <linearGradient id="coolVibeGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <linearGradient id="emeraldGlow" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stop-color="#10b981" />  <!-- Emerald-500 -->
-                            <stop offset="60%" stop-color="#06b6d4" />  <!-- Cyan-500 -->
-                            <stop offset="100%" stop-color="#3b82f6" /> <!-- Blue-500 -->
+                            <stop offset="100%" stop-color="#06b6d4" /> <!-- Cyan-500 -->
                         </linearGradient>
                     </defs>
                 </svg>
@@ -135,183 +129,187 @@
 
                 <!-- Stepper Center Count Panel -->
                 <div class="absolute flex flex-col items-center justify-center text-center">
-                    <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400">צעדי הליכה</span>
-                    <span id="stepCounter" class="text-6.5xl font-extrabold text-white my-0.5 tracking-tight select-none">0</span>
-                    <div class="flex items-center space-x-1 space-x-reverse text-[11px] font-semibold text-stone-400">
-                        <span>יעד:</span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-slate-500">צעדים</span>
+                    <span id="stepCounter" class="text-6xl font-extrabold text-white my-1 tracking-tight select-none">0</span>
+                    <div class="flex items-center space-x-1 space-x-reverse text-xs font-semibold text-slate-400">
+                        <span>מתוך יעד של:</span>
                         <span id="goalText" class="text-emerald-400 font-bold">5,000</span>
                     </div>
                 </div>
             </div>
 
-            <p class="text-[10px] font-bold text-stone-400 mt-5 z-10 tracking-wide hover:text-emerald-400 transition-colors uppercase select-none">
-                ⚡ לחצו בתוך העיגול כדי לסמל צעד בדיקה
+            <p class="text-[11px] font-bold text-slate-500 mt-6 z-10 tracking-wide hover:text-emerald-400 transition-colors uppercase select-none">
+                לחצו בתוך העיגול כדי לסמלץ צעד ידני
             </p>
 
-            <!-- Wellness Metrics Grid -->
-            <div class="grid grid-cols-3 gap-3 w-full mt-5 pt-5 border-t border-white/5 z-10">
+            <!-- Wellness Metrics Grid (Larger Fonts) -->
+            <div class="grid grid-cols-3 gap-3.5 w-full mt-6 pt-5 border-t border-white/5 z-10">
                 <!-- Calories panel -->
-                <div class="text-center p-3 rounded-2xl bg-white/[0.02] border border-white/5">
-                    <span class="block text-[9px] font-bold text-stone-500 uppercase tracking-wider">קלוריות</span>
+                <div class="text-center p-3 rounded-2xl bg-white/[0.01] border border-white/5">
+                    <span class="block text-xs font-bold text-slate-500 uppercase tracking-wider">קלוריות</span>
                     <div class="flex items-baseline justify-center mt-1">
-                        <span id="caloriesVal" class="text-lg font-extrabold text-stone-200">0</span>
-                        <span class="text-[9px] font-bold text-stone-500 mr-0.5">קק"ל</span>
+                        <span id="caloriesVal" class="text-lg font-black text-white">0</span>
+                        <span class="text-[10px] font-bold text-slate-500 mr-0.5">kcal</span>
                     </div>
                 </div>
                 <!-- Distance panel -->
-                <div class="text-center p-3 rounded-2xl bg-white/[0.02] border border-white/5">
-                    <span class="block text-[9px] font-bold text-stone-500 uppercase tracking-wider">מרחק</span>
+                <div class="text-center p-3 rounded-2xl bg-white/[0.01] border border-white/5">
+                    <span class="block text-xs font-bold text-slate-500 uppercase tracking-wider">מרחק</span>
                     <div class="flex items-baseline justify-center mt-1">
-                        <span id="distanceVal" class="text-lg font-extrabold text-stone-200">0.00</span>
-                        <span class="text-[9px] font-bold text-stone-500 mr-0.5">ק"מ</span>
+                        <span id="distanceVal" class="text-lg font-black text-white">0.00</span>
+                        <span class="text-[10px] font-bold text-slate-500 mr-0.5">km</span>
                     </div>
                 </div>
                 <!-- Duration panel -->
-                <div class="text-center p-3 rounded-2xl bg-white/[0.02] border border-white/5">
-                    <span class="block text-[9px] font-bold text-stone-500 uppercase tracking-wider">זמן פעילות</span>
+                <div class="text-center p-3 rounded-2xl bg-white/[0.01] border border-white/5">
+                    <span class="block text-xs font-bold text-slate-500 uppercase tracking-wider">זמן פעיל</span>
                     <div class="flex items-baseline justify-center mt-1">
-                        <span id="durationVal" class="text-lg font-extrabold text-stone-200">00:00</span>
+                        <span id="durationVal" class="text-lg font-black text-white">00:00</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Section 2: Fluid Mascot & Pace Gauge Dashboard -->
+        <!-- Section 2: Abstract Live Waveform (Replaced Mascot) & Tachometer Gauge -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             
-            <!-- Morphing Fluid Companion Panel -->
-            <div class="glass-card rounded-[32px] p-5 flex flex-col items-center justify-center min-h-[160px] relative overflow-hidden">
-                <span class="absolute top-3 right-4 text-[9px] font-bold text-emerald-400 uppercase tracking-wider">חבר וייב</span>
+            <!-- Dynamic Wave Visualizer Panel (High-End Siri Style Waveform) -->
+            <div class="glass-card rounded-[28px] p-5 flex flex-col justify-between min-h-[160px] relative overflow-hidden">
+                <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">גל תנועה אורגני (Telemetry)</span>
                 
-                <!-- Fluid Morphing Character in Cool Ocean Colors -->
-                <svg class="w-16 h-16 text-emerald-400 filter drop-shadow-[0_0_15px_rgba(16,185,129,0.35)] mt-2" viewBox="0 0 50 50">
-                    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
-                        <path class="fluid-mascot-path" fill="url(#liquidMetal)" stroke="none" d="M25,5 C37,5 45,13 45,25C45,37 37,45 25,45C13,45 5,37 5,25C5,13 13,5 25,5Z"/>
-                    </g>
-                    <!-- Floating face overlay -->
-                    <g fill="#061523" class="transform translate-y-[2px]">
-                        <!-- Blinking/Joyful curves -->
-                        <path d="M19 23 A1 1 0 0 1 23 23" stroke="#061523" stroke-width="2" fill="none" stroke-linecap="round" />
-                        <path d="M27 23 A1 1 0 0 1 31 23" stroke="#061523" stroke-width="2" fill="none" stroke-linecap="round" />
-                        <path d="M23,27 Q25,29 27,27" stroke="#061523" stroke-width="1.8" fill="none" stroke-linecap="round" />
-                    </g>
-                    <defs>
-                        <linearGradient id="liquidMetal" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#a7f3d0" />
-                            <stop offset="50%" stop-color="#10b981" />
-                            <stop offset="100%" stop-color="#06b6d4" />
-                        </linearGradient>
-                    </defs>
-                </svg>
+                <!-- The live abstract gait waves canvas -->
+                <div class="relative w-full h-16 my-1 bg-black/10 rounded-xl overflow-hidden">
+                    <canvas id="gaitWaveCanvas" class="absolute inset-0 w-full h-full"></canvas>
+                </div>
 
-                <div class="text-center mt-3 z-10">
-                    <span id="companionText" class="text-xs font-bold text-stone-300 block tracking-wide">ממתין לתנועה שלך...</span>
-                    <span class="text-[9px] font-bold text-stone-500 uppercase tracking-widest mt-0.5 block">קצב: <span id="cadenceText" class="text-emerald-400 font-extrabold">0</span> צעדים/דקה</span>
+                <div class="text-right z-10">
+                    <span id="companionText" class="text-xs font-medium text-slate-400 block tracking-wide">ממתין לתנועה ראשונית...</span>
+                    <span class="text-[11px] font-bold text-slate-500 uppercase tracking-widest mt-0.5 block">קצב: <span id="cadenceText" class="text-emerald-400 font-extrabold font-sans">0</span> צעדים/דקה</span>
                 </div>
             </div>
 
-            <!-- Stride Velocity Vibe Gauge -->
-            <div class="glass-card rounded-[32px] p-5 flex flex-col justify-between">
+            <!-- Stride Velocity Vibe Gauge (Premium Car Tachometer Style) -->
+            <div class="glass-card rounded-[28px] p-5 flex flex-col justify-between">
                 <div>
-                    <span class="text-[9px] font-bold text-emerald-400 uppercase tracking-wider block">מד קצב</span>
-                    <p class="text-xs text-stone-400 font-medium mt-0.5">סגנון ההליכה הנוכחי שלך</p>
+                    <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">עצימות הליכה</span>
+                    <p class="text-xs text-slate-400 mt-0.5">סיווג רציפות התנופה</p>
                 </div>
                 
-                <!-- Graphic meter badge -->
-                <div class="bg-white/[0.02] border border-white/5 rounded-2xl p-4 my-2 text-center">
-                    <div id="vibeGaugeEmoji" class="text-2xl mb-1 filter drop-shadow-md">🌸</div>
-                    <span id="vibeGaugeLabel" class="text-xs font-extrabold text-stone-300 uppercase tracking-widest">טיול רגוע</span>
+                <!-- Circular/Linear premium segment slider -->
+                <div class="my-3 space-y-1.5">
+                    <div class="h-1.5 w-full bg-slate-900 rounded-full overflow-hidden flex">
+                        <div id="intensityBarMellow" class="h-full w-1/3 bg-slate-800 transition-colors duration-300"></div>
+                        <div id="intensityBarSteady" class="h-full w-1/3 bg-slate-800 border-x border-black transition-colors duration-300"></div>
+                        <div id="intensityBarPower" class="h-full w-1/3 bg-slate-800 transition-colors duration-300"></div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span id="vibeGaugeLabel" class="text-sm font-bold text-slate-300">מנוחה</span>
+                        <div class="w-2.5 h-2.5 rounded-full bg-slate-700" id="intensityGlowNode"></div>
+                    </div>
                 </div>
 
-                <div class="text-[8px] text-stone-500 font-bold flex justify-between uppercase tracking-wider">
-                    <span>צ'יל 🌸</span>
-                    <span>קבוע 👟</span>
-                    <span>עוצמתי ⚡</span>
+                <div class="text-[10px] text-slate-500 font-bold flex justify-between uppercase tracking-wider">
+                    <span>עדין</span>
+                    <span>רציף</span>
+                    <span>עצים</span>
                 </div>
             </div>
 
         </div>
 
-        <!-- NEW Segment Control: Sensor Sensitivity Level -->
-        <div class="glass-card rounded-[28px] p-4 flex flex-col space-y-3">
-            <div class="flex items-center justify-between">
-                <span class="text-xs font-extrabold text-stone-300 uppercase tracking-wider">רגישות חיישנים (למצבי אחיזה שונים):</span>
-                <span id="sensBadge" class="text-[8px] font-bold bg-emerald-500/15 text-emerald-300 px-2 py-0.5 rounded-full uppercase tracking-wider">מצב יד יציבה</span>
-            </div>
+        <!-- Section 3: Luxury Control Triggers & BACKGROUND SERVICE CRITICAL CONTROLS -->
+        <div class="glass-card rounded-[28px] p-5 space-y-4">
             
-            <div class="grid grid-cols-2 gap-2 bg-black/40 rounded-xl p-1 border border-white/5">
-                <button id="sensNormalBtn" class="py-2 rounded-lg text-xs font-bold text-stone-400 hover:text-stone-200 transition-all">
-                    רגילה (בכיס / בתנופה)
-                </button>
-                <button id="sensHighBtn" class="py-2 rounded-lg text-xs font-bold bg-emerald-500 text-slate-950 shadow-md transition-all">
-                    גבוהה (יד יציבה / החזקת מסך)
-                </button>
-            </div>
-            
-            <p class="text-[10px] text-stone-400 text-center leading-relaxed">
-                💡 <strong>מצב יד יציבה</strong> מפעיל אלגוריתם בעל סף רגישות נמוך במיוחד שמסוגל לקלוט את הזעזועים הזעירים של הליכה העוברים דרך הגוף, גם כאשר כף היד שלכם מקובעת לחלוטין.
-            </p>
-        </div>
-
-        <!-- Section 3: Luxury Control Triggers -->
-        <div class="glass-card rounded-[32px] p-5 space-y-3">
             <!-- Active Master Session Toggle -->
-            <button id="sessionToggleBtn" class="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 font-bold text-slate-950 text-sm uppercase tracking-widest flex items-center justify-center space-x-3 transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] hover:brightness-105 shadow-xl shadow-emerald-500/10">
-                <span id="sessionButtonEmoji" class="text-base">✨</span>
-                <span id="sessionButtonText">הפעל וייב הליכה</span>
+            <button id="sessionToggleBtn" class="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 font-extrabold text-black text-sm uppercase tracking-widest flex items-center justify-center space-x-3 space-x-reverse transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] hover:brightness-105 shadow-xl shadow-emerald-500/10">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                </svg>
+                <span id="sessionButtonText">הפעל מצב הליכה פעיל</span>
             </button>
+
+            <!-- Screen Wake Lock Toggle (Keeps Screen On in Pocket) -->
+            <div class="p-3 rounded-2xl bg-white/[0.01] border border-white/5 flex items-center justify-between">
+                <div class="flex items-center space-x-2.5 space-x-reverse">
+                    <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25V4.5m5.303.197l-1.591 1.591M21 12h-2.25m-.197 5.303l-1.591-1.591M12 21.75V19.5m-5.303-.197l1.591-1.591M3 12h2.25m.197-5.303l1.591 1.591" />
+                    </svg>
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-200">מניעת נעילת מסך (מומלץ)</h4>
+                        <p class="text-[11px] text-slate-500 leading-normal">המסך יישאר דולק בעדינות בכיס למניעת הקפאת דפדפן.</p>
+                    </div>
+                </div>
+                <!-- Custom iOS/Android Style Switch Button -->
+                <button id="wakeLockSwitch" class="w-12 h-6 rounded-full bg-slate-800 p-1 flex items-center transition-colors duration-300 focus:outline-none" title="מנע נעילת מסך">
+                    <span id="wakeLockDot" class="w-4 h-4 rounded-full bg-slate-500 transition-transform duration-300 transform translate-x-0"></span>
+                </button>
+            </div>
 
             <!-- Simulation Controls -->
             <div class="pt-3 border-t border-white/5 grid grid-cols-2 gap-2">
-                <button id="simWalkBtn" class="py-2.5 px-3 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] text-stone-300 hover:text-white text-xs font-bold transition-all flex items-center justify-center space-x-1.5 uppercase tracking-wider">
-                    <span>👟</span>
-                    <span>הדמיית הליכה</span>
+                <button id="simWalkBtn" class="py-2.5 px-4 rounded-xl bg-white/[0.01] border border-white/5 hover:bg-white/[0.03] text-slate-400 hover:text-white text-xs font-bold transition-all flex items-center justify-center space-x-1.5 space-x-reverse uppercase tracking-wider">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-500" id="simWalkIndicator"></span>
+                    <span>סימולציית הליכה</span>
                 </button>
-                <button id="simRunBtn" class="py-2.5 px-3 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] text-stone-300 hover:text-white text-xs font-bold transition-all flex items-center justify-center space-x-1.5 uppercase tracking-wider">
-                    <span>⚡</span>
-                    <span>הדמיית ריצה</span>
+                <button id="simRunBtn" class="py-2.5 px-4 rounded-xl bg-white/[0.01] border border-white/5 hover:bg-white/[0.03] text-slate-400 hover:text-white text-xs font-bold transition-all flex items-center justify-center space-x-1.5 space-x-reverse uppercase tracking-wider">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-500" id="simRunIndicator"></span>
+                    <span>סימולציית ריצה</span>
                 </button>
             </div>
         </div>
 
-        <!-- Section 4: Real-Time Diagnostic Dashboard & Interactive Sensor Environment Inspector -->
+        <!-- Section 4: Real-Time Diagnostic & IMU Sensitivity Calibration -->
         <div class="glass-card rounded-[28px] p-5 space-y-4">
+            
             <div class="flex items-center justify-between">
-                <span class="text-[9px] font-extrabold text-stone-400 uppercase tracking-widest">לוח בקרה וחיישנים בזמן אמת</span>
-                <span id="sensorStatusBadge" class="text-[8px] font-extrabold bg-stone-900 border border-white/5 text-stone-400 px-2.5 py-1 rounded-full uppercase tracking-wider">ממתין לנתונים</span>
+                <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">ממשק כיול חיישנים</span>
+                <span id="sensorStatusBadge" class="text-[9px] font-extrabold bg-slate-900 border border-white/5 text-slate-500 px-3 py-1 rounded-full uppercase tracking-wider">אין אות</span>
+            </div>
+
+            <!-- Sensitivity Selector Block -->
+            <div class="bg-black/20 rounded-2xl p-3 border border-white/5 flex items-center justify-between">
+                <div>
+                    <span class="block text-xs font-bold text-slate-300">רגישות קריאת מד-תאוצה</span>
+                    <span class="block text-[11px] text-slate-500 mt-0.5">העבר למצב גבוה אם המכשיר מקובע או מוחזק יציב.</span>
+                </div>
+                <div class="flex bg-slate-950 p-1 rounded-xl border border-white/5">
+                    <button id="sensNormalBtn" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-emerald-500 text-slate-950">רגילה</button>
+                    <button id="sensHighBtn" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-white">גבוהה</button>
+                </div>
             </div>
 
             <!-- Warning Cards (Shows dynamically when sensor limits are blocked) -->
-            <div id="envAlertCard" class="hidden rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3.5 space-y-2 text-stone-200">
+            <div id="envAlertCard" class="hidden rounded-xl border border-rose-500/20 bg-rose-500/5 p-3.5 space-y-2 text-stone-200">
                 <div class="flex items-center space-x-2 space-x-reverse">
                     <span class="text-sm">⚠️</span>
-                    <h5 class="text-xs font-bold text-emerald-300 uppercase tracking-wider">מנהל האבטחה חוסם את החיישן</h5>
+                    <h5 class="text-xs font-bold text-rose-300 uppercase tracking-wider">חיישן התנועה חסום בדפדפן</h5>
                 </div>
-                <p id="envAlertMessage" class="text-[11px] text-stone-300 leading-relaxed"></p>
+                <p id="envAlertMessage" class="text-xs text-stone-400 leading-relaxed"></p>
                 <!-- Quick fix recommendations list -->
-                <div class="pt-1.5 border-t border-white/5 text-[10px] space-y-1 text-stone-400">
+                <div class="pt-2 border-t border-white/5 text-[11px] space-y-1 text-stone-400">
                     <p class="font-bold text-stone-300">פתרונות מהירים:</p>
-                    <p>• ודא שאתה פותח את הדף תחת קישור מאובטח <strong class="text-emerald-300">HTTPS</strong>.</p>
-                    <p>• הימנע מהרצה בתוך תצוגה מקדימה של צ'אט (Iframe) - פתח את הקישור של GitHub Pages ישירות בדפדפן הנייד.</p>
-                    <p>• במכשירי iOS (אייפון): הגדרות &gt; ספארי &gt; גישה לחיישני תנועה וכיוון (לוודא שמופעל).</p>
+                    <p>• ודא שפתחת את האפליקציה בכתובת המאובטחת <strong class="text-rose-300">HTTPS</strong> ב-GitHub Pages.</p>
+                    <p>• אל תריץ את הקוד בתוך תיבת הצ'אט - פתח את הקישור הישיר בדפדפן הנייד.</p>
                 </div>
             </div>
 
-            <div class="grid grid-cols-4 gap-2 text-center text-stone-300">
+            <!-- Diagnostics Data -->
+            <div class="grid grid-cols-4 gap-2 text-center text-slate-400">
                 <div class="bg-black/25 rounded-xl p-2 border border-white/5">
-                    <span class="block text-[8px] font-bold text-stone-500 uppercase tracking-wide">ציר X</span>
-                    <span id="diagX" class="text-xs font-bold font-mono">0.00</span>
+                    <span class="block text-[9px] font-bold text-slate-600">ציר X</span>
+                    <span id="diagX" class="text-xs font-bold font-mono text-slate-300">0.00</span>
                 </div>
                 <div class="bg-black/25 rounded-xl p-2 border border-white/5">
-                    <span class="block text-[8px] font-bold text-stone-500 uppercase tracking-wide">ציר Y</span>
-                    <span id="diagY" class="text-xs font-bold font-mono">0.00</span>
+                    <span class="block text-[9px] font-bold text-slate-600">ציר Y</span>
+                    <span id="diagY" class="text-xs font-bold font-mono text-slate-300">0.00</span>
                 </div>
                 <div class="bg-black/25 rounded-xl p-2 border border-white/5">
-                    <span class="block text-[8px] font-bold text-stone-500 uppercase tracking-wide">ציר Z</span>
-                    <span id="diagZ" class="text-xs font-bold font-mono">0.00</span>
+                    <span class="block text-[9px] font-bold text-slate-600">ציר Z</span>
+                    <span id="diagZ" class="text-xs font-bold font-mono text-slate-300">0.00</span>
                 </div>
                 <div class="bg-black/25 rounded-xl p-2 border border-white/5">
-                    <span class="block text-[8px] font-bold text-stone-500 uppercase tracking-wide">עוצמה (m/s²)</span>
+                    <span class="block text-[9px] font-bold text-slate-600">עוצמה G</span>
                     <span id="diagMag" class="text-xs font-extrabold text-emerald-400 font-mono">0.00</span>
                 </div>
             </div>
@@ -321,10 +319,10 @@
 
     <!-- Configure Goal Modal -->
     <div id="configModal" class="fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 z-50 hidden">
-        <div class="glass-card border-white/10 rounded-[32px] w-full max-w-xs p-6 space-y-4 shadow-2xl">
+        <div class="glass-card border-white/10 rounded-[28px] w-full max-w-xs p-6 space-y-4 shadow-2xl">
             <div class="text-center">
-                <h3 class="text-base font-extrabold tracking-wide uppercase text-stone-200">עדכון יעד יומי</h3>
-                <p class="text-xs text-stone-400 mt-1">בחר את יעד הצעדים הדינמי שלך</p>
+                <h3 class="text-base font-extrabold tracking-wide uppercase text-slate-200">עדכון יעד צעדים יומי</h3>
+                <p class="text-xs text-slate-500 mt-1">כויל את כמות הצעדים הנדרשת להיום</p>
             </div>
             
             <div class="space-y-2">
@@ -332,19 +330,19 @@
             </div>
 
             <div class="flex space-x-2">
-                <button id="closeModalBtn" class="flex-1 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-stone-300 transition-all uppercase tracking-wider">
+                <button id="closeModalBtn" class="flex-1 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-slate-400 transition-all uppercase tracking-wider">
                     ביטול
                 </button>
-                <button id="applyGoalBtn" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 text-xs font-bold transition-all hover:brightness-105 uppercase tracking-wider">
-                    שמור יעד
+                <button id="applyGoalBtn" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-xs font-bold text-black transition-all hover:brightness-105 uppercase tracking-wider">
+                    עדכן יעד
                 </button>
             </div>
         </div>
     </div>
 
     <!-- Cozy Luxury Footer -->
-    <footer class="py-5 text-center text-[10px] text-stone-600 font-medium tracking-widest uppercase">
-        <p>✨ טכנולוגיית בריאות vibe • הוקם ב-2026 ✨</p>
+    <footer class="py-5 text-center text-[10px] text-slate-600 font-bold tracking-widest uppercase">
+        <p>✨ vibe Wellness technology • עיצוב פרימיום 2026 ✨</p>
     </footer>
 
     <!-- Safe Audio Synthesis and Tracking Script -->
@@ -357,6 +355,8 @@
         let stepCount = 0;
         let dailyStepGoal = 5000;
         let sensorActive = false;
+        let isWakeLockEnabled = true; // Enabled by default for background walks
+        let wakeLockInstance = null;
         
         let calculatedCalories = 0;
         let calculatedDistance = 0.0;
@@ -376,24 +376,23 @@
         let isAudioOn = true;
         let audioContextInstance = null;
 
-        // Accelerometer analysis states
+        // Accelerometer analysis states (Dynamic Sensitivity default: Normal)
+        let sensitivityMode = 'normal'; // 'normal' or 'high'
         let lastAccelerationMag = 9.81;
         let runningBaseGravity = 9.81;
-        
-        // Dynamic Sensitivity Config parameters (Steady hand vs Normal mode)
-        let sensitivityMode = 'high'; // default to high for 'steady hand'
-        let lowPassAlpha = 0.35; // default high sensitivity alpha (allow quick impacts)
-        let stepThresholdOffset = 0.45; // trigger offset above gravity
-        let resetThresholdOffset = 0.30; // reset offset below gravity
-        
+        const lowPassAlpha = 0.15; // standard low-pass smoothing factor
         let isGaitPeakActive = false;
         let lastDetectedStepTime = 0;
-        const minimumStepPeriod = 330; // minimum duration between foot strikes in milliseconds (slightly faster for jog/walk)
+        const minimumStepPeriod = 360; // minimum duration between foot strikes in milliseconds
 
         // Dynamic 60fps Canvas render configurations
         let burstCanvas, burstCanvasContext;
         let activeParticlesArray = [];
         let visualLoopFrameId = null;
+
+        // Gait Wave Canvas configurations
+        let gaitWaveCanvas, gaitWaveContext;
+        let wavePhaseOffset = 0;
 
         // Simulation parameters
         let simulationIntervalId = null;
@@ -412,10 +411,12 @@
         document.addEventListener('DOMContentLoaded', () => {
             initializeUISelectors();
             initBurstCanvas();
+            initGaitWaveCanvas();
             updateStepProgressBar(0);
             bindUserInteractions();
             startGraphicsLoop();
             inspectRunningEnvironment();
+            syncWakeLockUI();
         });
 
         function initializeUISelectors() {
@@ -423,12 +424,15 @@
                 'stateIndicator', 'stateText', 'radialAnchor', 'arcProgress',
                 'stepCounter', 'goalText', 'caloriesVal', 'distanceVal',
                 'durationVal', 'companionText', 'cadenceText', 'vibeGaugeEmoji',
-                'vibeGaugeLabel', 'sessionToggleBtn', 'sessionButtonEmoji',
-                'sessionButtonText', 'simWalkBtn', 'simRunBtn', 'soundToggle',
-                'soundLabel', 'settingsBtn', 'configModal', 'goalInputField',
-                'closeModalBtn', 'applyGoalBtn', 'toastNode', 'toastTitle',
-                'toastMessage', 'sensorStatusBadge', 'diagX', 'diagY', 'diagZ', 'diagMag',
-                'envAlertCard', 'envAlertMessage', 'sensBadge', 'sensNormalBtn', 'sensHighBtn'
+                'vibeGaugeLabel', 'sessionToggleBtn', 'simWalkBtn', 'simRunBtn', 
+                'soundToggle', 'soundOnIcon', 'soundOffIcon', 'soundLabel', 'settingsBtn', 
+                'configModal', 'goalInputField', 'closeModalBtn', 'applyGoalBtn', 
+                'toastNode', 'toastTitle', 'toastMessage', 'sensorStatusBadge', 
+                'diagX', 'diagY', 'diagZ', 'diagMag', 'envAlertCard', 'envAlertMessage', 
+                'wakeLockSwitch', 'wakeLockDot', 'sensNormalBtn', 'sensHighBtn',
+                'gaitWaveCanvas', 'simWalkIndicator', 'simRunIndicator',
+                'intensityBarMellow', 'intensityBarSteady', 'intensityBarPower',
+                'intensityGlowNode'
             ];
             elementIds.forEach(id => {
                 UI[id] = document.getElementById(id);
@@ -443,10 +447,10 @@
                 
                 let issues = [];
                 if (isIframe) {
-                    issues.push("האפליקציה פועלת כרגע בתוך פריים מאובטח (iframe). דפדפנים מודרניים חוסמים אוטומטית גישה לחיישני תנועה מתוך פאנלים פנימיים מטעמי אבטחה.");
+                    issues.push("חלון התצוגה הנוכחי רץ בתוך מסגרת פנימית (Iframe). דפדפנים מונעים גישה לחיישני המכשיר בתוך מסגרות פנימיות מטעמי אבטחה.");
                 }
                 if (!isHttps) {
-                    issues.push("חיבור מאובטח (HTTPS) אינו פעיל. דפדפנים לניידים חוסמים נתוני חיישני תאוצה בחיבורים שאינם מאובטחים.");
+                    issues.push("חיבור מאובטח (HTTPS) אינו פעיל כרגע. דפדפנים מודרניים חוסמים גישה לנתוני מד-התאוצה אם החיבור אינו מאובטח בתעודת SSL.");
                 }
 
                 if (issues.length > 0) {
@@ -456,7 +460,7 @@
                     }
                     if (UI.sensorStatusBadge) {
                         UI.sensorStatusBadge.innerText = "גישה חסומה";
-                        UI.sensorStatusBadge.className = "text-[8px] font-extrabold bg-rose-500/20 border border-rose-500/30 text-rose-400 px-2.5 py-1 rounded-full uppercase tracking-wider";
+                        UI.sensorStatusBadge.className = "text-[10px] font-extrabold bg-rose-500/20 border border-rose-500/30 text-rose-400 px-2.5 py-1 rounded-full uppercase tracking-wider";
                     }
                 }
             } catch (e) {
@@ -488,7 +492,7 @@
                 const now = audioContextInstance.currentTime;
 
                 if (style === 'achievement') {
-                    // Play major triad scale completely built with safe linearRamp schedules (prevents RangeErrors)
+                    // Major scale climb
                     const freqs = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
                     freqs.forEach((frequency, index) => {
                         const noteOsc = audioContextInstance.createOscillator();
@@ -508,7 +512,6 @@
                         noteOsc.stop(now + index * 0.08 + 0.3);
                     });
                 } else {
-                    // Quick popping stride feedback
                     const osc = audioContextInstance.createOscillator();
                     const gain = audioContextInstance.createGain();
                     
@@ -527,6 +530,48 @@
                 }
             } catch (err) {
                 console.warn('Synthesizer block catch:', err);
+            }
+        }
+
+        // Screen Wake Lock API Logic (Prevents Screen Sleep)
+        async function requestScreenWakeLock() {
+            if (!isWakeLockEnabled || !isSessionActive) return;
+            if ('wakeLock' in navigator) {
+                try {
+                    wakeLockInstance = await navigator.wakeLock.request('screen');
+                } catch (err) {
+                    console.warn(`Screen Wake Lock error: ${err.message}`);
+                }
+            }
+        }
+
+        function releaseScreenWakeLock() {
+            if (wakeLockInstance !== null) {
+                try {
+                    wakeLockInstance.release();
+                    wakeLockInstance = null;
+                } catch (err) {
+                    console.warn(err);
+                }
+            }
+        }
+
+        document.addEventListener('visibilitychange', async () => {
+            if (wakeLockInstance !== null && document.visibilityState === 'visible') {
+                await requestScreenWakeLock();
+            }
+        });
+
+        function syncWakeLockUI() {
+            if (!UI.wakeLockSwitch || !UI.wakeLockDot) return;
+            if (isWakeLockEnabled) {
+                UI.wakeLockSwitch.classList.remove('bg-slate-800');
+                UI.wakeLockSwitch.classList.add('bg-emerald-500');
+                UI.wakeLockDot.className = "w-4 h-4 rounded-full bg-slate-950 transition-transform duration-300 transform translate-x-6";
+            } else {
+                UI.wakeLockSwitch.classList.add('bg-slate-800');
+                UI.wakeLockSwitch.classList.remove('bg-emerald-500');
+                UI.wakeLockDot.className = "w-4 h-4 rounded-full bg-slate-400 transition-transform duration-300 transform translate-x-0";
             }
         }
 
@@ -549,6 +594,26 @@
             }
         }
 
+        // Gait Waveform Canvas Initialization
+        function initGaitWaveCanvas() {
+            gaitWaveCanvas = document.getElementById('gaitWaveCanvas');
+            if (gaitWaveCanvas) {
+                gaitWaveContext = gaitWaveCanvas.getContext('2d');
+                resizeGaitWaveCanvas();
+                window.addEventListener('resize', resizeGaitWaveCanvas);
+            }
+        }
+
+        function resizeGaitWaveCanvas() {
+            if (!gaitWaveCanvas || !gaitWaveCanvas.parentElement) return;
+            const pixelRatio = window.devicePixelRatio || 1;
+            gaitWaveCanvas.width = gaitWaveCanvas.parentElement.clientWidth * pixelRatio;
+            gaitWaveCanvas.height = gaitWaveCanvas.parentElement.clientHeight * pixelRatio;
+            if (gaitWaveContext) {
+                gaitWaveContext.scale(pixelRatio, pixelRatio);
+            }
+        }
+
         // Interface events bindings
         function bindUserInteractions() {
             // Circle click step addition
@@ -561,18 +626,38 @@
                 registerStep();
             });
 
-            // Sensitivity Switch Toggles
-            UI.sensNormalBtn?.addEventListener('click', () => {
-                changeSensitivity('normal');
-            });
-            UI.sensHighBtn?.addEventListener('click', () => {
-                changeSensitivity('high');
-            });
-
             // Active action buttons toggles
             UI.sessionToggleBtn?.addEventListener('click', () => {
                 initVibeAudioInstance();
                 toggleWalkingSession();
+            });
+
+            // Switch Wake Lock status
+            UI.wakeLockSwitch?.addEventListener('click', () => {
+                isWakeLockEnabled = !isWakeLockEnabled;
+                syncWakeLockUI();
+                if (isWakeLockEnabled) {
+                    requestScreenWakeLock();
+                    dispatchCustomToast('מניעת נעילת מסך פעילה', 'הטלפון יישאר ער בעצימות נמוכה במהלך האימון.');
+                } else {
+                    releaseScreenWakeLock();
+                    dispatchCustomToast('נעילת מסך כבויה', 'המסך יכבה כרגיל בהתאם להגדרות המכשיר.');
+                }
+            });
+
+            // Sensitivity Toggle buttons
+            UI.sensNormalBtn?.addEventListener('click', () => {
+                sensitivityMode = 'normal';
+                UI.sensNormalBtn.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-emerald-500 text-slate-950";
+                UI.sensHighBtn.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-white";
+                dispatchCustomToast('כיול רגישות: רגילה', 'מתאים להליכה עם תנופה טבעית של הזרוע.');
+            });
+
+            UI.sensHighBtn?.addEventListener('click', () => {
+                sensitivityMode = 'high';
+                UI.sensHighBtn.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-emerald-500 text-slate-950";
+                UI.sensNormalBtn.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-white";
+                dispatchCustomToast('כיול רגישות: גבוהה', 'רעשי פגיעת עקב זעירים ייקראו גם בזרוע סטטית.');
             });
 
             UI.simWalkBtn?.addEventListener('click', () => {
@@ -589,11 +674,13 @@
 
             UI.soundToggle?.addEventListener('click', () => {
                 isAudioOn = !isAudioOn;
-                if (UI.soundLabel) UI.soundLabel.innerText = isAudioOn ? "🔊" : "🔇";
-                if (UI.soundToggle) {
-                    UI.soundToggle.className = isAudioOn 
-                        ? "w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-sm shadow-md hover:bg-white/10 transition-all text-stone-300 hover:text-white"
-                        : "w-9 h-9 rounded-full bg-stone-950 border border-white/5 flex items-center justify-center text-sm shadow-md transition-all text-stone-600";
+                if (isAudioOn) {
+                    UI.soundOnIcon?.classList.remove('hidden');
+                    UI.soundOffIcon?.classList.add('hidden');
+                    dispatchCustomToast('משוב שמע מופעל', 'קצב הצעדים ילווה בצלילי הקשה נקיים.');
+                } else {
+                    UI.soundOnIcon?.classList.add('hidden');
+                    UI.soundOffIcon?.classList.remove('hidden');
                 }
             });
 
@@ -613,37 +700,9 @@
                     if (UI.goalText) UI.goalText.innerText = dailyStepGoal.toLocaleString();
                     updateStepProgressBar(stepCount);
                     UI.configModal?.classList.add('hidden');
-                    dispatchCustomToast('היעד עודכן! 🎯', `היעד היומי שלך מכויל כעת ל-${dailyStepGoal.toLocaleString()} צעדים.`);
+                    dispatchCustomToast('יעד הצעדים עודכן', `המערכת מכוילת ליעד של ${dailyStepGoal.toLocaleString()} צעדים.`);
                 }
             });
-        }
-
-        // Change IMU Sensitivity Algorithm Parameters
-        function changeSensitivity(mode) {
-            sensitivityMode = mode;
-            if (mode === 'high') {
-                // Highly sensitive configuration for Steady Hand
-                lowPassAlpha = 0.38; // allow raw shocks
-                stepThresholdOffset = 0.42; // very low acceleration needed above gravity
-                resetThresholdOffset = 0.28; // small drop required to reset gait
-                
-                UI.sensHighBtn.className = "py-2 rounded-lg text-xs font-bold bg-emerald-500 text-slate-950 shadow-md transition-all";
-                UI.sensNormalBtn.className = "py-2 rounded-lg text-xs font-bold text-stone-400 hover:text-stone-200 transition-all";
-                UI.sensBadge.innerText = "מצב יד יציבה";
-                UI.sensBadge.className = "text-[8px] font-bold bg-emerald-500/15 text-emerald-300 px-2 py-0.5 rounded-full uppercase tracking-wider";
-                dispatchCustomToast('רגישות מוגברת הופעלה ⚡', 'האלגוריתם מכויל כעת לקליטת תנודות זעירות של אחיזת מסך.');
-            } else {
-                // Standard walking motion parameters (phone in pocket / arm swinging)
-                lowPassAlpha = 0.15;
-                stepThresholdOffset = 1.25;
-                resetThresholdOffset = 0.75;
-                
-                UI.sensNormalBtn.className = "py-2 rounded-lg text-xs font-bold bg-emerald-500 text-slate-950 shadow-md transition-all";
-                UI.sensHighBtn.className = "py-2 rounded-lg text-xs font-bold text-stone-400 hover:text-stone-200 transition-all";
-                UI.sensBadge.innerText = "מצב רגיל";
-                UI.sensBadge.className = "text-[8px] font-bold bg-white/5 border border-white/10 text-stone-300 px-2 py-0.5 rounded-full uppercase tracking-wider";
-                dispatchCustomToast('רגישות רגילה הופעלה 👟', 'האלגוריתם מכויל כעת לתנופות זרוע קלאסיות או הליכה בכיס.');
-            }
         }
 
         // Safe Session active trackers
@@ -652,42 +711,51 @@
                 isSessionActive = true;
                 sessionStartTimeStamp = Date.now() - (elapsedSeconds * 1000);
 
-                if (UI.stateIndicator) UI.stateIndicator.className = "w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse";
+                if (UI.stateIndicator) UI.stateIndicator.className = "w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10b981]";
                 if (UI.stateText) {
-                    UI.stateText.innerText = "מעקב תנועה פעיל";
-                    UI.stateText.className = "text-[9px] font-bold text-emerald-400 uppercase tracking-widest";
+                    UI.stateText.innerText = "תיעוד הליכה פעיל";
+                    UI.stateText.className = "text-xs font-bold text-emerald-400 uppercase tracking-widest";
                 }
 
-                if (UI.sessionButtonText) UI.sessionButtonText.innerText = "השהה אימון";
-                if (UI.sessionButtonEmoji) UI.sessionButtonEmoji.innerText = "🧘";
                 if (UI.sessionToggleBtn) {
-                    UI.sessionToggleBtn.className = "w-full py-4 rounded-2xl bg-gradient-to-r from-stone-800 to-stone-700 border border-white/10 font-bold text-white text-sm uppercase tracking-widest flex items-center justify-center space-x-3 transition-all duration-300 shadow-lg";
+                    UI.sessionToggleBtn.innerHTML = `
+                        <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
+                        </svg>
+                        <span>השהה פעילות</span>
+                    `;
+                    UI.sessionToggleBtn.className = "w-full py-4 rounded-2xl bg-white/5 border border-white/10 font-bold text-white text-sm uppercase tracking-widest flex items-center justify-center space-x-3 space-x-reverse transition-all duration-300 shadow-lg";
                 }
-                if (UI.companionText) UI.companionText.innerText = "עוקב אחר הצעדים שלך...";
+                if (UI.companionText) UI.companionText.innerText = "רושם צעדים בהליכה...";
 
                 startDashboardTicks();
                 initializePhysicalSensors();
+                requestScreenWakeLock(); // Request Wake Lock when session starts
             } else {
                 isSessionActive = false;
                 stopDashboardTicks();
                 clearSimulationEngines();
+                releaseScreenWakeLock(); // Release Wake Lock when session pauses
 
-                if (UI.stateIndicator) UI.stateIndicator.className = "w-1.5 h-1.5 rounded-full bg-amber-400";
+                if (UI.stateIndicator) UI.stateIndicator.className = "w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_#f59e0b]";
                 if (UI.stateText) {
-                    UI.stateText.innerText = "האימון מושהה";
-                    UI.stateText.className = "text-[9px] font-bold text-amber-400 uppercase tracking-widest";
+                    UI.stateText.innerText = "הליכה מושהית";
+                    UI.stateText.className = "text-xs font-bold text-amber-400 uppercase tracking-widest";
                 }
 
-                if (UI.sessionButtonText) UI.sessionButtonText.innerText = "הפעל וייב הליכה";
-                if (UI.sessionButtonEmoji) UI.sessionButtonEmoji.innerText = "✨";
                 if (UI.sessionToggleBtn) {
-                    UI.sessionToggleBtn.className = "w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 font-bold text-slate-950 text-sm uppercase tracking-widest flex items-center justify-center space-x-3 transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] hover:brightness-105 shadow-xl shadow-emerald-500/10";
+                    UI.sessionToggleBtn.innerHTML = `
+                        <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                        </svg>
+                        <span>חדש אימון הליכה</span>
+                    `;
+                    UI.sessionToggleBtn.className = "w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 font-extrabold text-black text-sm uppercase tracking-widest flex items-center justify-center space-x-3 space-x-reverse transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] hover:brightness-105 shadow-xl shadow-emerald-500/10";
                 }
-                if (UI.companionText) UI.companionText.innerText = "ממתין לתחילת הליכה...";
+                if (UI.companionText) UI.companionText.innerText = "ממתין לתנועה...";
                 if (UI.cadenceText) UI.cadenceText.innerText = "0";
                 
-                if (UI.vibeGaugeEmoji) UI.vibeGaugeEmoji.innerText = "🌸";
-                if (UI.vibeGaugeLabel) UI.vibeGaugeLabel.innerText = "טיול רגוע";
+                resetIntensityGauge();
 
                 if (sensorActive) {
                     window.removeEventListener('devicemotion', pipeMotionStream, true);
@@ -740,8 +808,8 @@
                             window.addEventListener('devicemotion', pipeMotionStream, true);
                             sensorActive = true;
                             if (UI.sensorStatusBadge) {
-                                UI.sensorStatusBadge.innerText = "מחובר";
-                                UI.sensorStatusBadge.className = "text-[8px] font-extrabold bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 px-2.5 py-1 rounded-full uppercase tracking-wider";
+                                UI.sensorStatusBadge.innerText = "פעיל";
+                                UI.sensorStatusBadge.className = "text-[10px] font-extrabold bg-emerald-500/15 border border-emerald-500/25 text-emerald-400 px-2.5 py-1 rounded-full uppercase tracking-wider";
                             }
                             if (UI.envAlertCard) UI.envAlertCard.classList.add('hidden');
                         }
@@ -751,8 +819,8 @@
                 window.addEventListener('devicemotion', pipeMotionStream, true);
                 sensorActive = true;
                 if (UI.sensorStatusBadge) {
-                    UI.sensorStatusBadge.innerText = "מחובר";
-                    UI.sensorStatusBadge.className = "text-[8px] font-extrabold bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 px-2.5 py-1 rounded-full uppercase tracking-wider";
+                    UI.sensorStatusBadge.innerText = "פעיל";
+                    UI.sensorStatusBadge.className = "text-[10px] font-extrabold bg-emerald-500/15 border border-emerald-500/25 text-emerald-400 px-2.5 py-1 rounded-full uppercase tracking-wider";
                 }
             }
         }
@@ -784,25 +852,27 @@
             parseSensorGaitSteps(filtered);
         }
 
-        // Hysteresis-Based Bulletproof Step Counting State Machine
+        // Hysteresis-Based Bulletproof Step Counting State Machine (Enhanced Sensitivity Support)
         function parseSensorGaitSteps(amplitude) {
             const now = Date.now();
             
-            // Dynamic threshold threshold margins around the moving baseline gravity
-            const upperStepThreshold = runningBaseGravity + stepThresholdOffset;
-            const lowerResetThreshold = runningBaseGravity - resetThresholdOffset;
+            // Adjust detection margins based on user-selected sensitivity mode
+            const sensitivityMargin = sensitivityMode === 'high' ? 0.38 : 1.25;
+            const resetMargin = sensitivityMode === 'high' ? 0.22 : 0.75;
+            
+            // Dynamic threshold margins around the moving baseline gravity
+            const upperStepThreshold = runningBaseGravity + sensitivityMargin;
+            const lowerResetThreshold = runningBaseGravity - resetMargin;
 
             if (!isGaitPeakActive) {
-                // Waiting for acceleration to shoot up past the dynamic limit
                 if (amplitude > upperStepThreshold) {
                     if (now - lastDetectedStepTime > minimumStepPeriod) {
                         registerStep();
                         lastDetectedStepTime = now;
-                        isGaitPeakActive = true; // Block subsequent steps until reset occurs
+                        isGaitPeakActive = true; 
                     }
                 }
             } else {
-                // Must drop back down under the reset value before another step can be triggers
                 if (amplitude < lowerResetThreshold) {
                     isGaitPeakActive = false;
                 }
@@ -855,17 +925,17 @@
             try {
                 if (stepCount >= 1 && !milestoneAchievementsMap.firstStep) {
                     milestoneAchievementsMap.firstStep = true;
-                    dispatchCustomToast('ההליכה התחילה! 🏃', 'צעד ראשון זוהה בהצלחה! המשך כך.');
+                    dispatchCustomToast('ההליכה התחילה 🏃', 'הצעד הראשון זוהה במערכת בהצלחה.');
                     triggerSynthesizerStepSound('achievement');
                 }
                 if (stepCount >= 50 && !milestoneAchievementsMap.warmup) {
                     milestoneAchievementsMap.warmup = true;
-                    dispatchCustomToast('התחממנו! 🔥', '50 צעדים זוהו. האנרגיה והסיבולת עולות.');
+                    dispatchCustomToast('שריפת אנרגיה פעילה 🔥', 'רשמת 50 צעדים. קצב הלב שלך מגיב לתנועה.');
                     triggerSynthesizerStepSound('achievement');
                 }
                 if (stepCount >= dailyStepGoal && !milestoneAchievementsMap.goalCompleted) {
                     milestoneAchievementsMap.goalCompleted = true;
-                    dispatchCustomToast('היעד הושג! 🏆', 'מאמץ יוצא מן הכלל! הגעת ליעד הצעדים היומי שלך.');
+                    dispatchCustomToast('היעד היומי הושג 🏆', 'השלמת בהצלחה את מספר הצעדים המוגדר.');
                     triggerSynthesizerStepSound('achievement');
                     igniteFullConfettiExplosion();
                 }
@@ -876,23 +946,57 @@
 
         function calculateVelocityPace() {
             if (!isSessionActive || runningCadence === 0) {
-                if (UI.companionText) UI.companionText.innerText = "ממתין לתנועה שלך...";
+                if (UI.companionText) UI.companionText.innerText = "ממתין לתנועה...";
+                resetIntensityGauge();
                 return;
             }
 
             if (runningCadence < 60) {
-                if (UI.vibeGaugeEmoji) UI.vibeGaugeEmoji.innerText = "🌸";
-                if (UI.vibeGaugeLabel) UI.vibeGaugeLabel.innerText = "טיול רגוע";
-                if (UI.companionText) UI.companionText.innerText = "צועד ברוגע ובכיף...";
+                if (UI.companionText) UI.companionText.innerText = "סגנון הליכה: טיול שליו";
+                updateIntensityGauge('mellow');
             } else if (runningCadence >= 60 && runningCadence < 120) {
-                if (UI.vibeGaugeEmoji) UI.vibeGaugeEmoji.innerText = "👟";
-                if (UI.vibeGaugeLabel) UI.vibeGaugeLabel.innerText = "הליכה יציבה";
-                if (UI.companionText) UI.companionText.innerText = "שומר על קצב הליכה מצוין!";
+                if (UI.companionText) UI.companionText.innerText = "סגנון הליכה: קצב ממוזג וקבוע";
+                updateIntensityGauge('steady');
             } else {
-                if (UI.vibeGaugeEmoji) UI.vibeGaugeEmoji.innerText = "⚡";
-                if (UI.vibeGaugeLabel) UI.vibeGaugeLabel.innerText = "הליכה מהירה";
-                if (UI.companionText) UI.companionText.innerText = "אימון מהיר ואנרגטי ביותר!";
+                if (UI.companionText) UI.companionText.innerText = "סגנון הליכה: הליכה ספורטיבית מהירה";
+                updateIntensityGauge('power');
             }
+        }
+
+        // Updates the premium car tachometer slider graphics
+        function updateIntensityGauge(level) {
+            if (!UI.intensityBarMellow || !UI.intensityBarSteady || !UI.intensityBarPower || !UI.vibeGaugeLabel || !UI.intensityGlowNode) return;
+            
+            // Clear statuses
+            UI.intensityBarMellow.className = "h-full w-1/3 bg-slate-800 transition-all duration-300";
+            UI.intensityBarSteady.className = "h-full w-1/3 bg-slate-800 border-x border-black transition-all duration-300";
+            UI.intensityBarPower.className = "h-full w-1/3 bg-slate-800 transition-all duration-300";
+            
+            if (level === 'mellow') {
+                UI.intensityBarMellow.className = "h-full w-1/3 bg-emerald-600 transition-all duration-300 shadow-[0_0_10px_#059669]";
+                UI.vibeGaugeLabel.innerText = "מתוחכם / קל";
+                UI.intensityGlowNode.className = "w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]";
+            } else if (level === 'steady') {
+                UI.intensityBarMellow.className = "h-full w-1/3 bg-teal-600 transition-all duration-300";
+                UI.intensityBarSteady.className = "h-full w-1/3 bg-teal-500 border-x border-black transition-all duration-300 shadow-[0_0_10px_#0d9488]";
+                UI.vibeGaugeLabel.innerText = "קצב רציף / בינוני";
+                UI.intensityGlowNode.className = "w-2.5 h-2.5 rounded-full bg-teal-400 shadow-[0_0_8px_#2dd4bf]";
+            } else if (level === 'power') {
+                UI.intensityBarMellow.className = "h-full w-1/3 bg-cyan-600 transition-all duration-300";
+                UI.intensityBarSteady.className = "h-full w-1/3 bg-cyan-600 border-x border-black transition-all duration-300";
+                UI.intensityBarPower.className = "h-full w-1/3 bg-cyan-400 transition-all duration-300 shadow-[0_0_10px_#06b6d4]";
+                UI.vibeGaugeLabel.innerText = "מאמץ מוגבר / מהיר";
+                UI.intensityGlowNode.className = "w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]";
+            }
+        }
+
+        function resetIntensityGauge() {
+            if (!UI.intensityBarMellow || !UI.intensityBarSteady || !UI.intensityBarPower || !UI.vibeGaugeLabel || !UI.intensityGlowNode) return;
+            UI.intensityBarMellow.className = "h-full w-1/3 bg-slate-800 transition-all duration-300";
+            UI.intensityBarSteady.className = "h-full w-1/3 bg-slate-800 border-x border-black transition-all duration-300";
+            UI.intensityBarPower.className = "h-full w-1/3 bg-slate-800 transition-all duration-300";
+            UI.vibeGaugeLabel.innerText = "מנוחה";
+            UI.intensityGlowNode.className = "w-2.5 h-2.5 rounded-full bg-slate-700";
         }
 
         // Set simulation mode profiles (Now automatically starts counting continuously!)
@@ -904,12 +1008,12 @@
             
             if (mode === 'run') {
                 tickSpeedMs = 350; // jog frequency ~170 spm
-                if (UI.simRunBtn) UI.simRunBtn.classList.add('bg-emerald-500/10', 'border-emerald-500/30', 'text-white');
-                if (UI.simWalkBtn) UI.simWalkBtn.classList.remove('bg-emerald-500/10', 'border-emerald-500/30', 'text-white');
+                if (UI.simRunIndicator) UI.simRunIndicator.className = "w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]";
+                if (UI.simWalkIndicator) UI.simWalkIndicator.className = "w-1.5 h-1.5 rounded-full bg-slate-500";
                 runningCadence = 171;
             } else {
-                if (UI.simWalkBtn) UI.simWalkBtn.classList.add('bg-emerald-500/10', 'border-emerald-500/30', 'text-white');
-                if (UI.simRunBtn) UI.simRunBtn.classList.remove('bg-emerald-500/10', 'border-emerald-500/30', 'text-white');
+                if (UI.simWalkIndicator) UI.simWalkIndicator.className = "w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]";
+                if (UI.simRunIndicator) UI.simRunIndicator.className = "w-1.5 h-1.5 rounded-full bg-slate-500";
                 runningCadence = 105;
             }
 
@@ -934,8 +1038,8 @@
             }
             currentSimulationType = null;
             
-            if (UI.simWalkBtn) UI.simWalkBtn.classList.remove('bg-emerald-500/10', 'border-emerald-500/30', 'text-white');
-            if (UI.simRunBtn) UI.simRunBtn.classList.remove('bg-emerald-500/10', 'border-emerald-500/30', 'text-white');
+            if (UI.simWalkIndicator) UI.simWalkIndicator.className = "w-1.5 h-1.5 rounded-full bg-slate-500";
+            if (UI.simRunIndicator) UI.simRunIndicator.className = "w-1.5 h-1.5 rounded-full bg-slate-500";
         }
 
         // Custom premium floating notification card
@@ -966,7 +1070,7 @@
                 if (!burstCanvas) return;
                 const cx = burstCanvas.width / (2 * (window.devicePixelRatio || 1));
                 const cy = burstCanvas.height / (2 * (window.devicePixelRatio || 1));
-                const gradientPalette = ['#fda4af', '#f43f5e', '#fb7185', '#f59e0b', '#38bdf8', '#c084fc'];
+                const gradientPalette = ['#6ee7b7', '#34d399', '#059669', '#06b6d4', '#0d9488', '#22d3ee'];
                 
                 for (let i = 0; i < 12; i++) {
                     const angle = Math.random() * Math.PI * 2;
@@ -992,7 +1096,7 @@
                 if (!burstCanvas) return;
                 const cx = burstCanvas.width / (2 * (window.devicePixelRatio || 1));
                 const cy = burstCanvas.height / (2 * (window.devicePixelRatio || 1));
-                const gradientPalette = ['#fda4af', '#f43f5e', '#fb7185', '#f59e0b', '#38bdf8', '#c084fc'];
+                const gradientPalette = ['#6ee7b7', '#34d399', '#059669', '#06b6d4', '#0d9488', '#22d3ee'];
                 
                 for (let i = 0; i < 80; i++) {
                     const angle = Math.random() * Math.PI * 2;
@@ -1017,9 +1121,65 @@
         function startGraphicsLoop() {
             function loop() {
                 updateBurstCanvasParticles();
+                drawDynamicGaitWave();
                 visualLoopFrameId = requestAnimationFrame(loop);
             }
             visualLoopFrameId = requestAnimationFrame(loop);
+        }
+
+        // Renders an elegant multi-layered abstract wave (Replaces Mascot)
+        function drawDynamicGaitWave() {
+            if (!gaitWaveCanvas || !gaitWaveContext) return;
+            const w = gaitWaveCanvas.width / (window.devicePixelRatio || 1);
+            const h = gaitWaveCanvas.height / (window.devicePixelRatio || 1);
+            
+            gaitWaveContext.clearRect(0, 0, w, h);
+            
+            // Adjust waveform attributes based on live movement
+            let amplitude = 4;
+            let waveSpeed = 0.04;
+            let lineCount = 3;
+            
+            if (isSessionActive) {
+                if (runningCadence > 0) {
+                    amplitude = runningCadence > 120 ? 16 : 10;
+                    waveSpeed = runningCadence > 120 ? 0.22 : 0.12;
+                }
+            }
+            
+            wavePhaseOffset += waveSpeed;
+            
+            // Draw 3 layers of beautifully blended emerald waveforms
+            for (let layer = 0; layer < lineCount; layer++) {
+                gaitWaveContext.beginPath();
+                gaitWaveContext.lineWidth = layer === 0 ? 2 : 1;
+                
+                // Color fading for depth
+                if (layer === 0) {
+                    gaitWaveContext.strokeStyle = 'rgba(16, 185, 129, 0.8)'; // Sharp main wave
+                } else if (layer === 1) {
+                    gaitWaveContext.strokeStyle = 'rgba(6, 182, 212, 0.4)';  // Soft cyan layer
+                } else {
+                    gaitWaveContext.strokeStyle = 'rgba(20, 184, 166, 0.2)';  // Faded background teal
+                }
+                
+                const factorX = 0.018 - (layer * 0.003);
+                const shiftY = (layer * 4) - 4;
+                
+                for (let x = 0; x < w; x++) {
+                    const sineVal = Math.sin(x * factorX + wavePhaseOffset + (layer * 1.5));
+                    // Fade out wave at edges
+                    const edgeEnvelope = Math.sin((x / w) * Math.PI);
+                    const y = (h / 2) + sineVal * amplitude * edgeEnvelope + shiftY;
+                    
+                    if (x === 0) {
+                        gaitWaveContext.moveTo(x, y);
+                    } else {
+                        gaitWaveContext.lineTo(x, y);
+                    }
+                }
+                gaitWaveContext.stroke();
+            }
         }
 
         // Atmospheric particle renderer
