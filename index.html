@@ -94,7 +94,16 @@
     <main class="flex-grow max-w-md w-full mx-auto px-4 py-4 space-y-5 flex flex-col justify-center">
 
         <!-- User Authentication & Profile Card (Modern Top Pill) -->
-        <div id="authProfileCard" class="glass-card rounded-2xl p-3 flex items-center justify-between border border-white/5 transition-all duration-300">
+        <div id="authProfileCard" class="glass-card rounded-2xl p-4 flex flex-col space-y-2 border border-white/5 transition-all duration-300">
+            <!-- Top row: Connection status indicator -->
+            <div id="dbStatusIndicator" class="flex items-center justify-between text-[11px] pb-1.5 border-b border-white/5 cursor-pointer hover:opacity-80">
+                <span class="text-slate-400 font-bold">סנכרון ענן (Firebase)</span>
+                <div class="flex items-center space-x-1.5 space-x-reverse">
+                    <span id="dbStatusDot" class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                    <span id="dbStatusText" class="text-amber-400 font-black">מתחבר...</span>
+                </div>
+            </div>
+
             <!-- Loading Auth State -->
             <div id="authLoadingState" class="w-full text-center py-1 text-xs text-slate-500 font-medium">
                 מסתנכרן מול שרת האבטחה...
@@ -426,6 +435,33 @@
         </div>
     </div>
 
+    <!-- Firebase Troubleshooting Help Modal -->
+    <div id="firebaseHelpModal" class="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 z-50 hidden" dir="rtl">
+        <div class="glass-card border-white/10 rounded-[32px] w-full max-w-sm p-6 space-y-4 shadow-2xl">
+            <div class="text-right">
+                <h3 class="text-lg font-extrabold tracking-wide uppercase text-slate-100">סנכרון ענן ופתרון תקלות 💡</h3>
+                <p class="text-xs text-slate-400 mt-1">כיצד לפתור בעיות שמירה והתחברות לגוגל</p>
+            </div>
+            
+            <div class="space-y-3 text-xs text-slate-300 leading-relaxed overflow-y-auto max-h-64 pr-1">
+                <p class="font-bold text-emerald-400">1. שמירה והתחברות לא עובדים?</p>
+                <p>כדי שהסנכרון והשמירה יפעלו, עליך לוודא שהפעלת את השירותים הבאים בתוך ה-Console של ה-Firebase האישי שלך:</p>
+                <p class="bg-white/5 p-2.5 rounded-lg">• <strong>Authentication:</strong> הפעל את ספק <strong>Google</strong> וגם את ספק <strong>Anonymous (אנונימי)</strong>.</p>
+                <p class="bg-white/5 p-2.5 rounded-lg">• <strong>Firestore Database:</strong> ודא שפתחת מסד נתונים (Firestore) במצב בדיקה (Test Mode).</p>
+                
+                <p class="font-bold text-emerald-400">2. שגיאה בהתחברות לגוגל?</p>
+                <p>גוגל חוסמת את ההתחברות אלא אם כן הוספת את דומיין האתר שלך כדומיין מאושר:</p>
+                <p class="bg-white/5 p-2.5 rounded-lg">ב-Firebase, גש ל-<strong>Authentication ➔ Settings (הגדרות) ➔ Authorized Domains (דומיינים מורשים)</strong>, לחץ על "Add Domain" והזן את כתובת ה-GitHub Pages שלך (למשל: <code>yourusername.github.io</code>).</p>
+            </div>
+
+            <div class="pt-2 border-t border-white/5">
+                <button id="closeFirebaseHelpBtn" class="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-xs font-bold text-black uppercase tracking-wider transition-all">
+                    הבנתי, תודה!
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Cozy Luxury Footer -->
     <footer class="py-5 text-center text-[10px] text-slate-600 font-bold tracking-widest uppercase">
         <p>✨ vibe Wellness technology • עיצוב פרימיום 2026 ✨</p>
@@ -545,7 +581,8 @@
                 'intensityBarMellow', 'intensityBarSteady', 'intensityBarPower',
                 'intensityGlowNode', 'historyContainer', 'historyPlaceholder', 'historyCountBadge',
                 'authProfileCard', 'authLoadingState', 'authGuestState', 'authActiveState',
-                'googleLoginBtn', 'googleLogoutBtn', 'userAvatarImg', 'userNameTxt'
+                'googleLoginBtn', 'googleLogoutBtn', 'userAvatarImg', 'userNameTxt',
+                'dbStatusIndicator', 'dbStatusDot', 'dbStatusText', 'firebaseHelpModal', 'closeFirebaseHelpBtn'
             ];
             elementIds.forEach(id => {
                 UI[id] = document.getElementById(id);
@@ -598,10 +635,16 @@
 
                 // Initial Authentication (RULE 3)
                 const initAuth = async () => {
-                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                        await signInWithCustomToken(auth, __initial_auth_token);
-                    } else {
-                        await signInAnonymously(auth);
+                    try {
+                        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                            await signInWithCustomToken(auth, __initial_auth_token);
+                        } else {
+                            await signInAnonymously(auth);
+                        }
+                    } catch (authError) {
+                        console.warn("Auth error, fallback enabled:", authError);
+                        toggleAuthUIState(null);
+                        showDbConnectionStatus(false, "שגיאת שרת");
                     }
                 };
                 await initAuth();
@@ -623,17 +666,36 @@
                         
                         // Sync history
                         bindWalkingHistoryListener();
+                        showDbConnectionStatus(true);
                     } else {
                         userId = null;
                         userWalksCollectionRef = null;
                         toggleAuthUIState(null);
+                        showDbConnectionStatus(false, "מנותק");
                     }
                 });
             } catch (error) {
                 console.error("Firebase Initialization Error:", error);
+                toggleAuthUIState(null);
+                showDbConnectionStatus(false, "אין חיבור");
                 if (UI.historyPlaceholder) {
                     UI.historyPlaceholder.innerText = "שגיאה בחיבור למסד הנתונים. ודא שהעתקת נכון את המפתחות בקובץ.";
                 }
+            }
+        }
+
+        // Displays database connection status clearly
+        function showDbConnectionStatus(isConnected, errorMessage = "") {
+            if (!UI.dbStatusDot || !UI.dbStatusText) return;
+
+            if (isConnected) {
+                UI.dbStatusDot.className = "w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_#10b981]";
+                UI.dbStatusText.innerText = "מחובר";
+                UI.dbStatusText.className = "text-emerald-400 font-black";
+            } else {
+                UI.dbStatusDot.className = "w-1.5 h-1.5 rounded-full bg-rose-500 shadow-[0_0_6px_#f43f5e] animate-pulse";
+                UI.dbStatusText.innerText = errorMessage || "שגיאת חיבור";
+                UI.dbStatusText.className = "text-rose-400 font-black";
             }
         }
 
@@ -665,7 +727,7 @@
                 dispatchCustomToast('התחברת בהצלחה! 🟢', 'היסטוריית הצעדים שלך מסונכרנת כעת לחשבון גוגל.');
             } catch (error) {
                 console.error("Google Auth error:", error);
-                dispatchCustomToast('שגיאה בהתחברות ❌', 'ההתחברות נחסמה בסביבה זו. נסה לפתוח בדפדפן עצמאי.');
+                dispatchCustomToast('שגיאה בהתחברות ❌', 'התחברות גוגל נכשלה. לחץ על הסטטוס בראש הכרטיסייה לפרטים.');
             }
         }
 
@@ -743,7 +805,12 @@
         }
 
         async function saveCurrentWalkSession() {
-            if (!userId || !userWalksCollectionRef || stepCount === 0) return;
+            if (stepCount === 0) return;
+
+            if (!userId || !userWalksCollectionRef) {
+                dispatchCustomToast('שגיאה בשמירה ❌', 'האפליקציה אינה מחוברת לענן. לחץ על הסטטוס בראש הכרטיסייה לפתרון.');
+                return;
+            }
 
             if (UI.saveSessionBtn) UI.saveSessionBtn.disabled = true;
 
@@ -764,7 +831,7 @@
                 resetActiveWalkingSession();
             } catch (err) {
                 console.error("Error saving walk:", err);
-                dispatchCustomToast('שגיאה בשמירה ❌', 'האימון לא נשמר. אנא נסה שנית.');
+                dispatchCustomToast('שגיאה בשמירה ❌', 'האימון לא נשמר. ודא שהפעלת את Firestore ב-Firebase.');
                 if (UI.saveSessionBtn) UI.saveSessionBtn.disabled = false;
             }
         }
@@ -953,6 +1020,15 @@
 
             UI.googleLogoutBtn?.addEventListener('click', () => {
                 logoutFromAccount();
+            });
+
+            // Help Modal click triggers
+            UI.dbStatusIndicator?.addEventListener('click', () => {
+                UI.firebaseHelpModal?.classList.remove('hidden');
+            });
+            
+            UI.closeFirebaseHelpBtn?.addEventListener('click', () => {
+                UI.firebaseHelpModal?.classList.add('hidden');
             });
 
             // Circle click step addition
@@ -1409,20 +1485,6 @@
                 burstCanvasContext.fill();
             }
             burstCanvasContext.globalAlpha = 1.0; 
-        }
-
-        // Native Audio Context initialization
-        function initVibeAudioInstance() {
-            try {
-                if (!audioContextInstance) {
-                    audioContextInstance = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                if (audioContextInstance && audioContextInstance.state === 'suspended') {
-                    audioContextInstance.resume();
-                }
-            } catch (e) {
-                console.warn('Audio Context failed to launch gracefully:', e);
-            }
         }
 
         // Framework rendering engine loop running at 60 fps
