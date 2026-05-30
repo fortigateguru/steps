@@ -880,137 +880,6 @@
             }
         }
 
-        // Low-Latency Audio Synthesizer Pop Block
-        function triggerSynthesizerStepSound(style = 'normal') {
-            if (!isAudioOn) return;
-            try {
-                initVibeAudioInstance();
-                if (!audioContextInstance) return;
-
-                const now = audioContextInstance.currentTime;
-
-                if (style === 'achievement') {
-                    const freqs = [523.25, 659.25, 783.99, 1046.50]; 
-                    freqs.forEach((frequency, index) => {
-                        const noteOsc = audioContextInstance.createOscillator();
-                        const noteGain = audioContextInstance.createGain();
-                        
-                        noteOsc.type = 'sine';
-                        noteOsc.frequency.setValueAtTime(frequency, now + index * 0.08);
-                        
-                        noteGain.gain.setValueAtTime(0.0001, now + index * 0.08);
-                        noteGain.gain.linearRampToValueAtTime(0.12, now + index * 0.08 + 0.02);
-                        noteGain.gain.linearRampToValueAtTime(0.0001, now + index * 0.08 + 0.25);
-                        
-                        noteOsc.connect(noteGain);
-                        noteGain.connect(audioContextInstance.destination);
-                        
-                        noteOsc.start(now + index * 0.08);
-                        noteOsc.stop(now + index * 0.08 + 0.3);
-                    });
-                } else {
-                    const osc = audioContextInstance.createOscillator();
-                    const gain = audioContextInstance.createGain();
-                    
-                    osc.connect(gain);
-                    gain.connect(audioContextInstance.destination);
-
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(280 + Math.random() * 60, now);
-                    osc.frequency.linearRampToValueAtTime(540 + Math.random() * 100, now + 0.08);
-                    
-                    gain.gain.setValueAtTime(0.1, now);
-                    gain.gain.linearRampToValueAtTime(0.0001, now + 0.08);
-                    
-                    osc.start(now);
-                    osc.stop(now + 0.09);
-                }
-            } catch (err) {
-                console.warn('Synthesizer block catch:', err);
-            }
-        }
-
-        // Screen Wake Lock API Logic (Prevents Screen Sleep)
-        async function requestScreenWakeLock() {
-            if (!isWakeLockEnabled || !isSessionActive) return;
-            if ('wakeLock' in navigator) {
-                try {
-                    wakeLockInstance = await navigator.wakeLock.request('screen');
-                } catch (err) {
-                    console.warn(`Screen Wake Lock error: ${err.message}`);
-                }
-            }
-        }
-
-        function releaseScreenWakeLock() {
-            if (wakeLockInstance !== null) {
-                try {
-                    wakeLockInstance.release();
-                    wakeLockInstance = null;
-                } catch (err) {
-                    console.warn(err);
-                }
-            }
-        }
-
-        document.addEventListener('visibilitychange', async () => {
-            if (wakeLockInstance !== null && document.visibilityState === 'visible') {
-                await requestScreenWakeLock();
-            }
-        });
-
-        function syncWakeLockUI() {
-            if (!UI.wakeLockSwitch || !UI.wakeLockDot) return;
-            if (isWakeLockEnabled) {
-                UI.wakeLockSwitch.classList.remove('bg-slate-800');
-                UI.wakeLockSwitch.classList.add('bg-emerald-500');
-                UI.wakeLockDot.className = "w-4 h-4 rounded-full bg-slate-950 transition-transform duration-300 transform translate-x-6";
-            } else {
-                UI.wakeLockSwitch.classList.add('bg-slate-800');
-                UI.wakeLockSwitch.classList.remove('bg-emerald-500');
-                UI.wakeLockDot.className = "w-4 h-4 rounded-full bg-slate-400 transition-transform duration-300 transform translate-x-0";
-            }
-        }
-
-        function initBurstCanvas() {
-            burstCanvas = document.getElementById('burstCanvas');
-            if (burstCanvas) {
-                burstCanvasContext = burstCanvas.getContext('2d');
-                resizeBurstCanvas();
-                window.addEventListener('resize', resizeBurstCanvas);
-            }
-        }
-
-        function resizeBurstCanvas() {
-            if (!burstCanvas || !burstCanvas.parentElement) return;
-            const pixelRatio = window.devicePixelRatio || 1;
-            burstCanvas.width = burstCanvas.parentElement.clientWidth * pixelRatio;
-            burstCanvas.height = burstCanvas.parentElement.clientHeight * pixelRatio;
-            if (burstCanvasContext) {
-                burstCanvasContext.scale(pixelRatio, pixelRatio);
-            }
-        }
-
-        // Gait Waveform Canvas Initialization
-        function initGaitWaveCanvas() {
-            gaitWaveCanvas = document.getElementById('gaitWaveCanvas');
-            if (gaitWaveCanvas) {
-                gaitWaveContext = gaitWaveCanvas.getContext('2d');
-                resizeGaitWaveCanvas();
-                window.addEventListener('resize', resizeGaitWaveCanvas);
-            }
-        }
-
-        function resizeGaitWaveCanvas() {
-            if (!gaitWaveCanvas || !gaitWaveCanvas.parentElement) return;
-            const pixelRatio = window.devicePixelRatio || 1;
-            gaitWaveCanvas.width = gaitWaveCanvas.parentElement.clientWidth * pixelRatio;
-            gaitWaveCanvas.height = gaitWaveCanvas.parentElement.clientHeight * pixelRatio;
-            if (gaitWaveContext) {
-                gaitWaveContext.scale(pixelRatio, pixelRatio);
-            }
-        }
-
         // Interface events bindings
         function bindUserInteractions() {
             // Google Login & Logout Bindings
@@ -1441,7 +1310,7 @@
                 }
             }, tickSpeedMs);
 
-            if (UI.cadenceText) UI.cadenceText.innerText = "105";
+            if (UI.cadenceText) UI.cadenceText.innerText = runningCadence;
             calculateVelocityPace();
         }
 
@@ -1485,6 +1354,20 @@
                 burstCanvasContext.fill();
             }
             burstCanvasContext.globalAlpha = 1.0; 
+        }
+
+        // Native Audio Context initialization
+        function initVibeAudioInstance() {
+            try {
+                if (!audioContextInstance) {
+                    audioContextInstance = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioContextInstance && audioContextInstance.state === 'suspended') {
+                    audioContextInstance.resume();
+                }
+            } catch (e) {
+                console.warn('Audio Context failed to launch gracefully:', e);
+            }
         }
 
         // Framework rendering engine loop running at 60 fps
