@@ -11,7 +11,7 @@
     <!-- Apple Touch Icon (iOS Home Screen App Icon) -->
     <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='28' fill='%230c0e12'/%3E%3Ccircle cx='50' cy='50' r='38' fill='none' stroke='url(%23g)' stroke-width='5'/%3E%3Cpath d='M44 24 L58 42 L41 48 L56 76 L39 53 L51 47 Z' fill='url(%23g)'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2310b981'/%3E%3Cstop offset='100%25' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E">
 
-    <!-- Mobile Web App Capability (Renders full-screen without Safari/Chrome browser bars) -->
+    <!-- Mobile Web App Capability -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="vibe">
@@ -68,7 +68,7 @@
                 </div>
             </div>
 
-            <!-- Header Controls (Clean vector buttons) -->
+            <!-- Header Controls -->
             <div class="flex items-center space-x-2 space-x-reverse">
                 <!-- Sound Toggle -->
                 <button id="soundToggle" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shadow-md hover:bg-white/10 transition-all text-slate-400 hover:text-white" title="הפעל/השתק צלילים">
@@ -91,9 +91,53 @@
     </header>
 
     <!-- Main Mobile Dashboard -->
-    <main class="flex-grow max-w-md w-full mx-auto px-4 py-6 space-y-6 flex flex-col justify-center">
+    <main class="flex-grow max-w-md w-full mx-auto px-4 py-4 space-y-5 flex flex-col justify-center">
 
-        <!-- Modern Floating Toast Alerts (Minimalist Banner) -->
+        <!-- User Authentication & Profile Card (Modern Top Pill) -->
+        <div id="authProfileCard" class="glass-card rounded-2xl p-3 flex items-center justify-between border border-white/5 transition-all duration-300">
+            <!-- Loading Auth State -->
+            <div id="authLoadingState" class="w-full text-center py-1 text-xs text-slate-500 font-medium">
+                מסתנכרן מול שרת האבטחה...
+            </div>
+
+            <!-- Anonymous Guest State (Prompt to Login) -->
+            <div id="authGuestState" class="hidden w-full flex items-center justify-between">
+                <div class="flex items-center space-x-2.5 space-x-reverse">
+                    <div class="w-7 h-7 rounded-full bg-slate-900 border border-white/10 flex items-center justify-center text-xs text-slate-400">
+                        👤
+                    </div>
+                    <div>
+                        <span class="block text-xs font-bold text-slate-300">מצב אורח זמני</span>
+                        <span class="block text-[10px] text-slate-500">התחבר כדי לשמור היסטוריה לצמיתות</span>
+                    </div>
+                </div>
+                <!-- Google Login Button -->
+                <button id="googleLoginBtn" class="px-3.5 py-1.5 rounded-xl bg-white text-black hover:bg-slate-100 transition-all text-xs font-black flex items-center space-x-1.5 space-x-reverse shadow-md active:scale-95">
+                    <!-- Clean SVG Google Icon -->
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24">
+                        <path fill="#EA4335" d="M12.24 10.285V14.4h6.887c-.275 1.565-1.88 4.604-6.887 4.604-4.33 0-7.859-3.578-7.859-8s3.53-8 7.859-8c2.46 0 4.105 1.025 5.047 1.926l3.227-3.227C18.281 1.402 15.483 0 12.24 0c-6.63 0-12 5.37-12 12s5.37 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.086-1.39-.189-1.989H12.24z"/>
+                    </svg>
+                    <span>התחבר עם Google</span>
+                </button>
+            </div>
+
+            <!-- Authenticated User State -->
+            <div id="authActiveState" class="hidden w-full flex items-center justify-between">
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <img id="userAvatarImg" src="" alt="תמונת משתמש" class="w-8 h-8 rounded-full border border-emerald-500/30 object-cover bg-slate-900" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%23a8a29e\'%3E%3Cpath d=\'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\'/%3E%3C/svg%3E'">
+                    <div>
+                        <span id="userNameTxt" class="block text-xs font-extrabold text-slate-200">משתמש מחובר</span>
+                        <span class="block text-[10px] text-emerald-400 font-medium">הנתונים מגובים בענן של גוגל</span>
+                    </div>
+                </div>
+                <!-- Logout Trigger -->
+                <button id="googleLogoutBtn" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-rose-500/10 border border-white/10 hover:border-rose-500/30 transition-all text-xs font-bold text-slate-400 hover:text-rose-400 active:scale-95" title="התנתק מהחשבון">
+                    התנתק
+                </button>
+            </div>
+        </div>
+
+        <!-- Modern Floating Toast Alerts -->
         <div id="toastNode" class="fixed top-24 left-1/2 -translate-x-1/2 w-[92%] max-w-sm bg-slate-900 border border-emerald-500/20 rounded-2xl shadow-2xl py-4 px-5 flex items-center space-x-4 space-x-reverse transform -translate-y-28 opacity-0 transition-all duration-500 z-50 pointer-events-none">
             <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -170,7 +214,7 @@
                     <span class="block text-xs font-bold text-slate-500 uppercase tracking-wider">מרחק</span>
                     <div class="flex items-baseline justify-center mt-1">
                         <span id="distanceVal" class="text-lg font-black text-white font-mono">0.00</span>
-                        <span class="text-[10px] font-bold text-slate-500 mr-0.5">km</span>
+                        <span class="text-[10px] font-bold text-slate-500 mr-0.5 font-sans">km</span>
                     </div>
                 </div>
                 <!-- Duration panel -->
@@ -252,7 +296,7 @@
                 </button>
             </div>
 
-            <!-- Screen Wake Lock Toggle (Keeps Screen On in Pocket) -->
+            <!-- Screen Wake Lock Toggle -->
             <div class="p-3 rounded-2xl bg-white/[0.01] border border-white/5 flex items-center justify-between">
                 <div class="flex items-center space-x-2.5 space-x-reverse">
                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -391,7 +435,7 @@
     <script type="module">
         // Firebase modules import
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Global variables namespace container
@@ -457,6 +501,9 @@
         // Firebase & Firestore State Variables
         let db, auth, appId, userId = null;
         let userWalksCollectionRef = null;
+        let historyUnsubscribeListener = null;
+
+        const googleProvider = new GoogleAuthProvider();
 
         // Safe DOM selection function run inside dynamic event listener
         document.addEventListener('DOMContentLoaded', () => {
@@ -484,22 +531,69 @@
                 'wakeLockSwitch', 'wakeLockDot', 'sensNormalBtn', 'sensHighBtn',
                 'gaitWaveCanvas', 'simWalkIndicator', 'simRunIndicator',
                 'intensityBarMellow', 'intensityBarSteady', 'intensityBarPower',
-                'intensityGlowNode', 'historyContainer', 'historyPlaceholder', 'historyCountBadge'
+                'intensityGlowNode', 'historyContainer', 'historyPlaceholder', 'historyCountBadge',
+                'authProfileCard', 'authLoadingState', 'authGuestState', 'authActiveState',
+                'googleLoginBtn', 'googleLogoutBtn', 'userAvatarImg', 'userNameTxt'
             ];
             elementIds.forEach(id => {
                 UI[id] = document.getElementById(id);
             });
         }
 
+        // Environment inspection to help users troubleshoot why physical walk steps aren't counting
+        function inspectRunningEnvironment() {
+            try {
+                const isIframe = window.self !== window.top;
+                const isHttps = window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                
+                let issues = [];
+                if (isIframe) {
+                    issues.push("חלון התצוגה הנוכחי רץ בתוך מסגרת פנימית (Iframe). דפדפנים מונעים גישה לחיישני המכשיר בתוך מסגרות פנימיות מטעמי אבטחה.");
+                }
+                if (!isHttps) {
+                    issues.push("חיבור מאובטח (HTTPS) אינו פעיל כרגע. דפדפנים מודרניים חוסמים גישה לנתוני מד-התאוצה אם החיבור אינו מאובטח בתעודת SSL.");
+                }
+
+                if (issues.length > 0) {
+                    if (UI.envAlertCard && UI.envAlertMessage) {
+                        UI.envAlertMessage.innerHTML = issues.join("<br><br>");
+                        UI.envAlertCard.classList.remove('hidden');
+                    }
+                    if (UI.sensorStatusBadge) {
+                        UI.sensorStatusBadge.innerText = "גישה חסומה";
+                        UI.sensorStatusBadge.className = "text-[10px] font-extrabold bg-rose-500/20 border border-rose-500/30 text-rose-400 px-2.5 py-1 rounded-full uppercase tracking-wider";
+                    }
+                }
+            } catch (e) {
+                console.warn("Environment inspector error:", e);
+            }
+        }
+
         // Firebase Setup incorporating RULES 1, 2, 3
         async function setupFirebaseBackend() {
             try {
-                const firebaseConfig = JSON.parse(__firebase_config);
+                // Safe check: If __firebase_config exists globally (Gemini Environment), parse it.
+                // Otherwise, use a safe default placeholder for GitHub Pages until the user updates it manually.
+                let firebaseConfig;
+                if (typeof __firebase_config !== 'undefined') {
+                    firebaseConfig = JSON.parse(__firebase_config);
+                } else {
+                    firebaseConfig = {
+                        apiKey: "YOUR_API_KEY_HERE",
+                        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+                        projectId: "YOUR_PROJECT_ID",
+                        storageBucket: "YOUR_PROJECT_ID.appspot.com",
+                        messagingSenderId: "YOUR_SENDER_ID",
+                        appId: "YOUR_APP_ID"
+                    };
+                }
+
                 const app = initializeApp(firebaseConfig);
                 auth = getAuth(app);
                 db = getFirestore(app);
-                appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                appId = typeof __app_id !== 'undefined' ? __app_id : 'vibe-app-default';
 
+                // Initial Authentication (RULE 3)
                 const initAuth = async () => {
                     if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
                         await signInWithCustomToken(auth, __initial_auth_token);
@@ -510,10 +604,26 @@
                 await initAuth();
 
                 onAuthStateChanged(auth, (user) => {
+                    // Clean previous snapshots to prevent double renders
+                    if (historyUnsubscribeListener) {
+                        historyUnsubscribeListener();
+                        historyUnsubscribeListener = null;
+                    }
+
                     if (user) {
                         userId = user.uid;
+                        // RULE 1: Strict Paths
                         userWalksCollectionRef = collection(db, 'artifacts', appId, 'users', userId, 'walks');
+                        
+                        // Update UI according to anonymous vs Google login status
+                        toggleAuthUIState(user);
+                        
+                        // Sync history
                         bindWalkingHistoryListener();
+                    } else {
+                        userId = null;
+                        userWalksCollectionRef = null;
+                        toggleAuthUIState(null);
                     }
                 });
             } catch (error) {
@@ -524,15 +634,60 @@
             }
         }
 
+        // Handles Profile top card switching states
+        function toggleAuthUIState(user) {
+            if (!UI.authLoadingState || !UI.authGuestState || !UI.authActiveState) return;
+
+            UI.authLoadingState.classList.add('hidden');
+
+            if (user && !user.isAnonymous) {
+                // Logged in with Google
+                UI.authGuestState.classList.add('hidden');
+                UI.authActiveState.classList.remove('hidden');
+                if (UI.userNameTxt) UI.userNameTxt.innerText = user.displayName || "חבר Vibe";
+                if (UI.userAvatarImg) UI.userAvatarImg.src = user.photoURL || "";
+            } else {
+                // Anonymous Guest User
+                UI.authActiveState.classList.add('hidden');
+                UI.authGuestState.classList.remove('hidden');
+            }
+        }
+
+        // Google Sign-In trigger
+        async function loginWithGoogleAccount() {
+            try {
+                initVibeAudioInstance();
+                // Opens Google Authentication popup overlay
+                await signInWithPopup(auth, googleProvider);
+                dispatchCustomToast('התחברת בהצלחה! 🟢', 'היסטוריית הצעדים שלך מסונכרנת כעת לחשבון גוגל.');
+            } catch (error) {
+                console.error("Google Auth error:", error);
+                dispatchCustomToast('שגיאה בהתחברות ❌', 'ההתחברות נחסמה בסביבה זו. נסה לפתוח בדפדפן עצמאי.');
+            }
+        }
+
+        async function logoutFromAccount() {
+            try {
+                await signOut(auth);
+                // Return safely to anonymous mode
+                await signInAnonymously(auth);
+                dispatchCustomToast('התנתקת מהחשבון 👋', 'עברת למצב אורח זמני.');
+            } catch (error) {
+                console.error("Logout error:", error);
+            }
+        }
+
         function bindWalkingHistoryListener() {
             if (!userId || !userWalksCollectionRef) return;
 
-            onSnapshot(userWalksCollectionRef, (querySnapshot) => {
+            // RULE 2: No complex queries. Sorting is handled in client-side Javascript.
+            historyUnsubscribeListener = onSnapshot(userWalksCollectionRef, (querySnapshot) => {
                 const walks = [];
                 querySnapshot.forEach((doc) => {
                     walks.push({ id: doc.id, ...doc.data() });
                 });
 
+                // Sort by date descending
                 walks.sort((a, b) => new Date(b.date) - new Date(a.date));
                 renderWalkingHistory(walks);
             }, (error) => {
@@ -652,35 +807,6 @@
             if (sensorActive) {
                 window.removeEventListener('devicemotion', pipeMotionStream, true);
                 sensorActive = false;
-            }
-        }
-
-        // Environment inspection to help users troubleshoot why physical walk steps aren't counting
-        function inspectRunningEnvironment() {
-            try {
-                const isIframe = window.self !== window.top;
-                const isHttps = window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-                
-                let issues = [];
-                if (isIframe) {
-                    issues.push("חלון התצוגה הנוכחי רץ בתוך מסגרת פנימית (Iframe). דפדפנים מונעים גישה לחיישני המכשיר בתוך מסגרות פנימיות מטעמי אבטחה.");
-                }
-                if (!isHttps) {
-                    issues.push("חיבור מאובטח (HTTPS) אינו פעיל כרגע. דפדפנים מודרניים חוסמים גישה לנתוני מד-התאוצה אם החיבור אינו מאובטח בתעודת SSL.");
-                }
-
-                if (issues.length > 0) {
-                    if (UI.envAlertCard && UI.envAlertMessage) {
-                        UI.envAlertMessage.innerHTML = issues.join("<br><br>");
-                        UI.envAlertCard.classList.remove('hidden');
-                    }
-                    if (UI.sensorStatusBadge) {
-                        UI.sensorStatusBadge.innerText = "גישה חסומה";
-                        UI.sensorStatusBadge.className = "text-[10px] font-extrabold bg-rose-500/20 border border-rose-500/30 text-rose-400 px-2.5 py-1 rounded-full uppercase tracking-wider";
-                    }
-                }
-            } catch (e) {
-                console.warn("Environment inspector error:", e);
             }
         }
 
@@ -817,6 +943,15 @@
 
         // Interface events bindings
         function bindUserInteractions() {
+            // Google Login & Logout Bindings
+            UI.googleLoginBtn?.addEventListener('click', () => {
+                loginWithGoogleAccount();
+            });
+
+            UI.googleLogoutBtn?.addEventListener('click', () => {
+                logoutFromAccount();
+            });
+
             // Circle click step addition
             UI.radialAnchor?.addEventListener('click', (event) => {
                 event.stopPropagation();
@@ -911,7 +1046,7 @@
             });
         }
 
-        // Safe Session active trackers
+        // Active Session Controls
         function toggleWalkingSession() {
             if (!isSessionActive) {
                 isSessionActive = true;
@@ -1056,6 +1191,7 @@
             parseSensorGaitSteps(filtered);
         }
 
+        // Hysteresis-Based Bulletproof Step Counting State Machine (Enhanced Sensitivity Support)
         function parseSensorGaitSteps(amplitude) {
             const now = Date.now();
             
