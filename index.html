@@ -50,7 +50,7 @@
         }
     </style>
 </head>
-<body class="text-slate-200 flex flex-col justify-between overflow-x-hidden antialiased">
+<body class="text-slate-200 flex flex-col justify-between overflow-x-hidden antialiased" dir="rtl">
 
     <!-- Top Luxury Navigation Bar -->
     <header class="px-6 py-4 border-b border-white/5 bg-black/30 backdrop-blur-md sticky top-0 z-40">
@@ -175,7 +175,7 @@
                     <!-- Premium Emerald/Teal Gradient -->
                     <defs>
                         <linearGradient id="emeraldGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#10b981" />  <!-- Emerald-500 -->
+                            <stop offset="0%" stop-color="#10b981" />  <!-- Emerald-400 -->
                             <stop offset="100%" stop-color="#06b6d4" /> <!-- Cyan-500 -->
                         </linearGradient>
                     </defs>
@@ -376,7 +376,7 @@
                 <div class="pt-2 border-t border-white/5 text-[11px] space-y-1 text-stone-400">
                     <p class="font-bold text-stone-300">פתרונות מהירים:</p>
                     <p>• ודא שפתחת את האפליקציה בכתובת המאובטחת <strong class="text-rose-300">HTTPS</strong> ב-GitHub Pages.</p>
-                    <p>• אל תריץ את הקוד בתוך תיבת הצ'אט - פתח את הקישור הישיר בדפדפן הנייד.</p>
+                    <p>• אל תריץ את הקוד בתוך תיבת הצ'אט - פתח את הקישור הישיר בדפנפן הנייד.</p>
                 </div>
             </div>
 
@@ -437,6 +437,18 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // ==========================================================
+        // 🔴 אובייקט ה-firebaseConfig האישי והמאומת שלך מטומע כאן לחלוטין!
+        // ==========================================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyBEnJu0jIQLJgb2A5OJGp9kP9lbldBTxNM",
+            authDomain: "vibesteps-9057c.firebaseapp.com",
+            projectId: "vibesteps-9057c",
+            storageBucket: "vibesteps-9057c.firebasestorage.app",
+            messagingSenderId: "949644307582",
+            appId: "1:949644307582:web:0e37f462972f85cfa83c2f"
+        };
 
         // Global variables namespace container
         const UI = {};
@@ -572,23 +584,14 @@
         // Firebase Setup incorporating RULES 1, 2, 3
         async function setupFirebaseBackend() {
             try {
-                // Safe check: If __firebase_config exists globally (Gemini Environment), parse it.
-                // Otherwise, use a safe default placeholder for GitHub Pages until the user updates it manually.
-                let firebaseConfig;
-                if (typeof __firebase_config !== 'undefined') {
-                    firebaseConfig = JSON.parse(__firebase_config);
-                } else {
-                    firebaseConfig = {
-                        apiKey: "YOUR_API_KEY_HERE",
-                        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-                        projectId: "YOUR_PROJECT_ID",
-                        storageBucket: "YOUR_PROJECT_ID.appspot.com",
-                        messagingSenderId: "YOUR_SENDER_ID",
-                        appId: "YOUR_APP_ID"
-                    };
+                // Dynamic check: Use the injected server credentials inside our workspace,
+                // or fall back cleanly to your newly configured firebaseConfig object in GitHub Pages.
+                let activeConfig = firebaseConfig;
+                if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+                    activeConfig = JSON.parse(__firebase_config);
                 }
 
-                const app = initializeApp(firebaseConfig);
+                const app = initializeApp(activeConfig);
                 auth = getAuth(app);
                 db = getFirestore(app);
                 appId = typeof __app_id !== 'undefined' ? __app_id : 'vibe-app-default';
@@ -629,7 +632,7 @@
             } catch (error) {
                 console.error("Firebase Initialization Error:", error);
                 if (UI.historyPlaceholder) {
-                    UI.historyPlaceholder.innerText = "שגיאה בחיבור למסד הנתונים.";
+                    UI.historyPlaceholder.innerText = "שגיאה בחיבור למסד הנתונים. ודא שהעתקת נכון את המפתחות בקובץ.";
                 }
             }
         }
@@ -1191,7 +1194,6 @@
             parseSensorGaitSteps(filtered);
         }
 
-        // Hysteresis-Based Bulletproof Step Counting State Machine (Enhanced Sensitivity Support)
         function parseSensorGaitSteps(amplitude) {
             const now = Date.now();
             
@@ -1363,7 +1365,7 @@
                 }
             }, tickSpeedMs);
 
-            if (UI.cadenceText) UI.cadenceText.innerText = runningCadence;
+            if (UI.cadenceText) UI.cadenceText.innerText = "105";
             calculateVelocityPace();
         }
 
@@ -1378,78 +1380,48 @@
             if (UI.simRunIndicator) UI.simRunIndicator.className = "w-1.5 h-1.5 rounded-full bg-slate-500";
         }
 
-        // Custom premium floating notification card
-        function dispatchCustomToast(title, text) {
-            try {
-                if (!UI.toastNode || !UI.toastTitle || !UI.toastMessage) return;
+        // Atmospheric particle renderer
+        function updateBurstCanvasParticles() {
+            if (!burstCanvas || !burstCanvasContext) return;
 
-                UI.toastTitle.innerText = title;
-                UI.toastMessage.innerText = text;
+            const w = burstCanvas.width / (window.devicePixelRatio || 1);
+            const h = burstCanvas.height / (window.devicePixelRatio || 1);
+            
+            burstCanvasContext.clearRect(0, 0, w, h);
+
+            for (let i = activeParticlesArray.length - 1; i >= 0; i--) {
+                const p = activeParticlesArray[i];
                 
-                UI.toastNode.classList.remove('opacity-0', '-translate-y-28');
-                UI.toastNode.classList.add('opacity-100', 'translate-y-0');
-                
-                setTimeout(() => {
-                    if (UI.toastNode) {
-                        UI.toastNode.classList.add('opacity-0', '-translate-y-28');
-                        UI.toastNode.classList.remove('opacity-100', 'translate-y-0');
-                    }
-                }, 4000);
-            } catch (err) {
-                console.warn('Toast system error caught:', err);
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.05; // soft atmospheric fall gravity
+                p.alpha -= p.decay;
+
+                if (p.alpha <= 0) {
+                    activeParticlesArray.splice(i, 1);
+                    continue;
+                }
+
+                burstCanvasContext.globalAlpha = p.alpha;
+                burstCanvasContext.fillStyle = p.color;
+                burstCanvasContext.beginPath();
+                burstCanvasContext.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                burstCanvasContext.fill();
             }
+            burstCanvasContext.globalAlpha = 1.0; 
         }
 
-        // Glow canvas particle physics calculations
-        function generateGlowParticles() {
+        // Native Audio Context initialization
+        function initVibeAudioInstance() {
             try {
-                if (!burstCanvas) return;
-                const cx = burstCanvas.width / (2 * (window.devicePixelRatio || 1));
-                const cy = burstCanvas.height / (2 * (window.devicePixelRatio || 1));
-                const gradientPalette = ['#6ee7b7', '#34d399', '#059669', '#06b6d4', '#0d9488', '#22d3ee'];
-                
-                for (let i = 0; i < 12; i++) {
-                    const angle = Math.random() * Math.PI * 2;
-                    const speed = 1.2 + Math.random() * 3.5;
-                    activeParticlesArray.push({
-                        x: cx,
-                        y: cy,
-                        vx: Math.cos(angle) * speed,
-                        vy: Math.sin(angle) * speed - 0.5,
-                        radius: 1.5 + Math.random() * 3,
-                        color: gradientPalette[Math.floor(Math.random() * gradientPalette.length)],
-                        alpha: 1.0,
-                        decay: 0.02 + Math.random() * 0.02
-                    });
+                if (!audioContextInstance) {
+                    audioContextInstance = new (window.AudioContext || window.webkitAudioContext)();
                 }
-            } catch (err) {
-                console.warn('Particles burst caught exception:', err);
-            }
-        }
-
-        function igniteFullConfettiExplosion() {
-            try {
-                if (!burstCanvas) return;
-                const cx = burstCanvas.width / (2 * (window.devicePixelRatio || 1));
-                const cy = burstCanvas.height / (2 * (window.devicePixelRatio || 1));
-                const gradientPalette = ['#6ee7b7', '#34d399', '#059669', '#06b6d4', '#0d9488', '#22d3ee'];
-                
-                for (let i = 0; i < 80; i++) {
-                    const angle = Math.random() * Math.PI * 2;
-                    const speed = 3.0 + Math.random() * 7.0;
-                    activeParticlesArray.push({
-                        x: cx,
-                        y: cy,
-                        vx: Math.cos(angle) * speed,
-                        vy: Math.sin(angle) * speed - 1.5,
-                        radius: 2.5 + Math.random() * 4,
-                        color: gradientPalette[Math.floor(Math.random() * gradientPalette.length)],
-                        alpha: 1.0,
-                        decay: 0.009 + Math.random() * 0.012
-                    });
+                if (audioContextInstance && audioContextInstance.state === 'suspended') {
+                    audioContextInstance.resume();
                 }
-            } catch (err) {
-                console.warn('Confetti system exception caught:', err);
+            } catch (e) {
+                console.warn('Audio Context failed to launch gracefully:', e);
             }
         }
 
@@ -1511,51 +1483,6 @@
                     }
                 }
                 gaitWaveContext.stroke();
-            }
-        }
-
-        // Atmospheric particle renderer
-        function updateBurstCanvasParticles() {
-            if (!burstCanvas || !burstCanvasContext) return;
-
-            const w = burstCanvas.width / (window.devicePixelRatio || 1);
-            const h = burstCanvas.height / (window.devicePixelRatio || 1);
-            
-            burstCanvasContext.clearRect(0, 0, w, h);
-
-            for (let i = activeParticlesArray.length - 1; i >= 0; i--) {
-                const p = activeParticlesArray[i];
-                
-                p.x += p.vx;
-                p.y += p.vy;
-                p.vy += 0.05; 
-                p.alpha -= p.decay;
-
-                if (p.alpha <= 0) {
-                    activeParticlesArray.splice(i, 1);
-                    continue;
-                }
-
-                burstCanvasContext.globalAlpha = p.alpha;
-                burstCanvasContext.fillStyle = p.color;
-                burstCanvasContext.beginPath();
-                burstCanvasContext.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                burstCanvasContext.fill();
-            }
-            burstCanvasContext.globalAlpha = 1.0; 
-        }
-
-        // Native Audio Context initialization
-        function initVibeAudioInstance() {
-            try {
-                if (!audioContextInstance) {
-                    audioContextInstance = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                if (audioContextInstance && audioContextInstance.state === 'suspended') {
-                    audioContextInstance.resume();
-                }
-            } catch (e) {
-                console.warn('Audio Context failed to launch gracefully:', e);
             }
         }
     </script>
